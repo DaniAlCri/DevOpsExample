@@ -9,21 +9,23 @@ pipeline{
     stages {
         stage('build') {
             steps {
-                echo build
+                sh 'echo "Build stage"'
             }
         }
         stage('test'){
             steps{
                 #Test javascript
-                echo 'test stage'
+                sh 'echo "Test stage"'
             }
         }
         stage('deploy'){
             steps{
-                echo 'deploy stage'
+                sh 'echo "Deploy stage"'
 
             }
         }
     }
+    post{
 
+    }
 }
