@@ -1,26 +1,23 @@
 pipeline{
-    agent any
+    docker { image 'nginx' }
     stages {
         stage('build') {
             steps {
                 fileExists 'script.js'
                 // sh en win10 no funciona, hay que usar bat
-                bat 'echo "Build stage"'
+                sh 'echo "Build stage"'
             }
         }
         stage('test'){
             steps{
-                bat 'echo "Test stage"'
+                sh 'echo "Test stage"'
             }
         }
         stage('deploy'){
             steps{
-                bat 'echo "Deploy stage"'
+                sh 'echo "Deploy stage"'
 
             }
         }
-    }
-    post{
-
     }
 }
