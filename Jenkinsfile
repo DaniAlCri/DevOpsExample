@@ -10,9 +10,10 @@ pipeline{
     stages {
         stage('build') {
             steps {
+                fileExists 'script.js'
                 sh 'echo "Build stage"'
-                sh 'cd ${env.SCRIPT_PATH}'
-                sh 'node New.js '
+                #sh 'cd ${env.SCRIPT_PATH}'
+                #sh 'node New.js '
             }
         }
         stage('test'){
