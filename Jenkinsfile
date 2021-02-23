@@ -1,6 +1,6 @@
 pipeline{
     agent{
-        docker { image 'nginx:alpine' }
+        docker { image 'alpine:3.7' }
     }
     stages {
         stage('build') {
