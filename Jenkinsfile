@@ -1,5 +1,5 @@
 pipeline{
-    docker { image 'nginx' }
+    docker { image 'nginx:alpine' }
     stages {
         stage('build') {
             steps {
