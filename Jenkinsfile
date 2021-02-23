@@ -4,17 +4,18 @@ pipeline{
         stage('build') {
             steps {
                 fileExists 'script.js'
-                sh 'echo "Build stage"'
+                // sh en win10 no funciona, hay que usar bat
+                bat 'echo "Build stage"'
             }
         }
         stage('test'){
             steps{
-                sh 'echo "Test stage"'
+                bat 'echo "Test stage"'
             }
         }
         stage('deploy'){
             steps{
-                sh 'echo "Deploy stage"'
+                bat 'echo "Deploy stage"'
 
             }
         }
