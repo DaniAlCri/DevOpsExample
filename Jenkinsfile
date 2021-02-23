@@ -5,11 +5,14 @@ pipeline{
     }
     environment{
         HTML_PATH '/usr/share/nginx/html/AddWebpage.html'
+        SCRIPT_PATH '/usr/share/nginx/html/script.html'
     }
     stages {
         stage('build') {
             steps {
                 sh 'echo "Build stage"'
+                sh 'cd ${env.SCRIPT_PATH}'
+                sh 'node New.js '
             }
         }
         stage('test'){
