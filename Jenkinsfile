@@ -1,11 +1,12 @@
 pipeline{
-    agent node{
-        label 'nginx'
-        customWorkspace '/usr/share/nginx/html'
-    }
+    agent any
+    #agent node{
+        #label 'nginx'
+        #customWorkspace '/usr/share/nginx/html'
+    #}
     environment{
-        HTML_PATH '/usr/share/nginx/html/AddWebpage.html'
-        SCRIPT_PATH '/usr/share/nginx/html/script.html'
+        #HTML_PATH '/usr/share/nginx/html/AddWebpage.html'
+        #SCRIPT_PATH '/usr/share/nginx/html/script.html'
     }
     stages {
         stage('build') {
