@@ -1,25 +1,14 @@
 pipeline{
     agent any
-    #agent node{
-        #label 'nginx'
-        #customWorkspace '/usr/share/nginx/html'
-    #}
-    environment{
-        #HTML_PATH '/usr/share/nginx/html/AddWebpage.html'
-        #SCRIPT_PATH '/usr/share/nginx/html/script.html'
-    }
     stages {
         stage('build') {
             steps {
                 fileExists 'script.js'
                 sh 'echo "Build stage"'
-                #sh 'cd ${env.SCRIPT_PATH}'
-                #sh 'node New.js '
             }
         }
         stage('test'){
             steps{
-                #Test javascript
                 sh 'echo "Test stage"'
             }
         }
