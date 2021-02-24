@@ -1,5 +1,7 @@
 pipeline{
-    agent any
+    agent {
+        docker { image 'node:14-alpine' }
+    }
     stages {
         stage('build') {
             steps {
@@ -17,7 +19,7 @@ pipeline{
         stage('deploy'){
             steps{
                 sh 'echo "Deploy stage"'
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'webpage', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: 'addNumber'])
+                //publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'webpage', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: 'addNumber'])
 
             }
         }
