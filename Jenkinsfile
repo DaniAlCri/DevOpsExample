@@ -6,6 +6,7 @@ pipeline{
                 fileExists 'script.js'
                 // sh en win10 no funciona, hay que usar bat
                 sh 'echo "Build stage"'
+                sh 'ls'
             }
         }
         stage('test'){
