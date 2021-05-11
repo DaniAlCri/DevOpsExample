@@ -1,0 +1,20 @@
+Build - Se hace la build del código
+    - Hacer un pull de GitHub y preparar el código en una carpeta
+    - Como estamos usando un javascript, aún no necesita un make.
+        - Más adelante se puede usar un script que necesite building, pero por ahora no 
+            hace falta.
+Tests - Se ejecutan varios tests
+    - Pasar un test unitario al script https://unitjs.com/guide/quickstart.html 
+        - Caso normal
+        - Pasar un !integer
+        - Pasar un número más grande que el máximo de un integer
+        - Números negativos
+    - Si el test unitario funciona continuar
+        - Si no, parar y mandar un correo con el fallo
+Push - Si todo ha llegado bien hasta aquí, se hace un push del código en el repositorio.
+    - Hacer un push en Jenkins
+    - Subir la app al servidor
+Deploy - Se envía el código al servidor canario.
+    - Subir el código a un servidor
+        - Explicar que se debe subir primero a un servidor canario y que tras un tiempo, 
+            si no ha dado fallos, se puede subir al resto de servidores
