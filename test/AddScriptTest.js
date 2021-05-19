@@ -21,29 +21,33 @@ describe('Testing AddScript.js', function(){
   }); */
 
   it('Normal case', function() {
-    //var result = AddScript.add(2,3);
-    //assert.strictEqual(result, 5)
-    AddScript.add(1,1).should.equal(2);
-    //assert.strictEqual(add(2,3), 5);
+    var result = AddScript.add("2 3");
+    assert.strictEqual(result, 5)
   })
 
-  /*it('One negative number case', function(){
-    assert.strictEqual(test.value(add(-7,3), -4));
-    //result == test.value(add(-7,3)).isEqual(-4);
+  it('One negative number case', function() {
+    result = AddScript.add("-7 3");
+    assert.strictEqual(result, -4)
   });
 
-  /*it('Negative numbers case', function(){
-    assert.strictEqual(test.value(add(-7,-3), -10));
-    //result == test.value(add(-7,-3)).isEqual(-10);
+  it('Negative numbers case', function(){
+    result = AddScript.add("-7 -3");
+    assert.strictEqual(result, -10)
+
   });
 
   it('Big numbers case', function(){
-    assert.strictEqual(test.value(add(1000000,1000000000), 1001000000));
-    //result == test.value(add(1000000,1000000000)).isEqual(1001000000);
+    result = AddScript.add(" 1000000 1000000000  1001000000 ");
+    assert.strictEqual(result, 2002000000);
   });
 
   it('No numbers case', function(){
-    assert.strictEqual(typeof test.value("a","b"), "String")
-    //result == test.value(add("a","b")).isEqual(1001000000);
-  });*/
+    result = AddScript.add(" asd e - * ");
+    assert.strictEqual(result, 0);
+  });
+
+  it('Mixed numbers and characters case', function() {
+    result = AddScript.add("5 g--s ad asd -r - 12 -4 @3~# asd");
+    assert.strictEqual(result, 13);
+  });
 })

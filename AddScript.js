@@ -1,19 +1,17 @@
-function add(a, b) {
-	var result
-			
-	a = parseInt(document.getElementById("aValue").value);
-	b = parseInt(document.getElementById("bValue").value);
-	result = a + b;
+function add(text) {
+	var result = 0
+	var numbers
 
-	document.getElementById("result").value = result;
+	numbers = text.split(" ");
 
+	for (var x of numbers)
+		if(Number.isInteger(Number.parseInt(x)))
+			result += Number.parseInt(x);
 
 	return result;
 }
 
-// If we're running under Node, 
+// If we're running under Node
 if(typeof exports !== 'undefined') {
     exports.add = add;
 }
-
-console.log("Result");
