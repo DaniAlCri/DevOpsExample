@@ -1,15 +1,17 @@
 Build - Se hace la build del código
     - Hacer un pull de GitHub y preparar el código en una carpeta
+    - Instalar npm, mocha y mocha-junit-reporter <- npm debería estar ya instalado o inicializado con el archivo de conf package.json
+        npm install --global mocha
+        npm install -g mocha-junit-reporter
     - Como estamos usando un javascript, aún no necesita un make.
         - Más adelante se puede usar un script que necesite building, pero por ahora no 
             hace falta.
 Tests - Se ejecutan varios tests
     - Pasar un test unitario al script https://unitjs.com/guide/quickstart.html 
-        - Caso normal
-        - Pasar un !integer
-        - Pasar un número más grande que el máximo de un integer
-        - Números negativos
-    - Si el test unitario funciona continuar
+        npm test
+            (script -> "mocha test --reporter mocha-junit-reporter")
+        
+    - Si el test unitario funciona continuar (leer test-result.xml)
         - Si no, parar y mandar un correo con el fallo
 Push - Si todo ha llegado bien hasta aquí, se hace un push del código en el repositorio.
     - Hacer un push en Jenkins

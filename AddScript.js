@@ -8,6 +8,7 @@ function add(text) {
 		if(Number.isInteger(Number.parseInt(x)))
 			result += Number.parseInt(x);
 
+	console.log("Result = " + result);
 	return result;
 }
 
