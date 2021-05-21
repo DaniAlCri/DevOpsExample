@@ -1,3 +1,7 @@
+Conectar Jenkins y GitHub
+https://www.blazemeter.com/blog/how-to-integrate-your-github-repository-to-your-jenkins-project
+
+
 Jenkinsfile para detectar cambios en el jenkinsfile y saltar al otro
     - https://www.bmc.com/blogs/ci-cd-pipeline-setup/ 
 
