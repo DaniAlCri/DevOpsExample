@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+<meta charset="UTF-8">
 <html>
 	<!-- 
     script de javascript que permita sumar los valores 
     id="aValue" e id="bValue" para almacenarlos en id="value"
-    El script se llamará "add"
-	<script>	
-	</script>
+    El script se llama "AddScript.js"
 	-->
+	<script type="text/javascript" src="AddScript.js"></script>
+
 	<body>
 		<!-- 
       Explicación de la página y título: "DevOps example"
@@ -16,5 +17,31 @@
       Añadir dos cuadros de texto y un botón para activar el
       el script "add".
 		-->
+		<h1 style="color: #5e9ca0;">DevOps example</h1>
+		<h2 style="color: #2e6c80;">This is a simple app</h2>
+		<p>This example adds the numbers put in the text box and separated by at least one space</p>
+
+		<form >
+			<!-- 
+			A :
+			<input type="number" id="aValue" name="TextBox1">
+			<br>
+			B : 
+			<input type="number" id="bValue" name="TextBox2">
+			<br>
+			A + B =
+			<output type="number" id="result" name="output">
+			<br>
+			-->
+
+			<textarea id="input" name="TextBox" rows="4" cols="50" oninput="output.value=add(this.value)">
+			</textarea>
+			<br>
+			Result = 
+			<output type="number" id="output" name="result">
+			<br>
+		</form>
+
+		
 	</body>
 </html>

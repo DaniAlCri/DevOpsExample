@@ -1,24 +1,39 @@
 pipeline {
   agent any
+
+  tools{
+      npm install --global mocha
+      npm install -g mocha-junit-reporter
+  }
   stages {
     stage('build') {
       steps {
-        sh 'echo "Build stage"'
+        sh echo 'Build stage'
         sh 'ls'
       }
     }
 
     stage('test') {
       steps {
-        sh 'echo "Test stage"'
+        sh echo 'Test stage'
+        sh 'npm test'
       }
     }
 
     stage('deploy') {
       steps {
-        sh 'echo "Deploy stage"'
+        echo 'Deploy stage'
       }
     }
 
   }
+
+  post {
+        failure {
+            echo 'Failed test, sending mail to developer'
+            mail to: 'dalvac01@estudiantes.unileon.es',
+                subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+                body: "Something is wrong with ${env.BUILD_URL}"
+        }
+    }
 }

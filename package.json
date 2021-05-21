@@ -1,0 +1,27 @@
+{
+  "name": "DevOpsExample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "AddScript.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "test-jenkins": "mocha test --reporter mocha-junit-reporter"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaniAlCri/DevOpsExample.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DaniAlCri/DevOpsExample/issues"
+  },
+  "homepage": "https://github.com/DaniAlCri/DevOpsExample#readme",
+  "devDependencies": {
+    "mocha-junit-reporter": "^2.0.0"
+  }
+}
