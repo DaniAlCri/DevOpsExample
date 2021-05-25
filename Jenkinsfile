@@ -6,9 +6,9 @@ pipeline {
       steps {
         echo 'Build stage'
 
-        bat 'npm --version'
         bat 'npm install --global mocha'
-        bat 'npm install -g mocha-junit-reporter'        
+        bat 'npm install -g mocha-junit-reporter'
+        bat 'npm --version'
       }
     }
   
@@ -29,6 +29,9 @@ pipeline {
   }
 
   post {
+        sucess{
+          echo 'Succesfull test'
+        }
         failure {
             echo 'Failed test, sending mail to developer'
             mail to: 'dalvac01@estudiantes.unileon.es',
