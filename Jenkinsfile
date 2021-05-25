@@ -32,13 +32,13 @@ pipeline {
         success {
           echo 'Succesfull test'
           mail to: 'dalvac01@estudiantes.unileon.es',
-                subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-                body: "Something is wrong with ${env.BUILD_URL}"
+                subject: "Successful comit: ${currentBuild.fullDisplayName}",
+                body: "Everything is ok ${env.BUILD_URL}"
         }
         failure {
             echo 'Failed test, sending mail to developer'
             mail to: 'dalvac01@estudiantes.unileon.es',
-                subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+                subject: "Failed commit: ${currentBuild.fullDisplayName}",
                 body: "Something is wrong with ${env.BUILD_URL}"
         }
     }
