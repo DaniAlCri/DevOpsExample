@@ -3,22 +3,22 @@ pipeline {
 
   tools{
     nodejs{
-      sh 'npm install --global mocha'
-      sh 'npm install -g mocha-junit-reporter'
+      bat 'npm install --global mocha'
+      bat 'npm install -g mocha-junit-reporter'
     }
   }
   stages {
     stage('build') {
       steps {
         echo 'Build stage'
-        sh "ls"
+        bat "ls"
       }
     }
 
     stage('test') {
       steps {
         echo 'Test stage'
-        sh 'npm test'
+        bat 'npm test'
       }
     }
 
