@@ -13,7 +13,7 @@ pipeline {
           // on windows
           //env.PATH="${env.NODEJS_HOME};${env.PATH}"
         bat 'npm --version'
-          //bat 'npm install --global mocha'
+        bat 'npm install --global mocha'
           //bat 'npm install -g mocha-junit-reporter'
         //}
         
