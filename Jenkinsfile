@@ -3,7 +3,6 @@ pipeline {
 
   tools{
     nodejs{
-      sh 'npm --version'
       sh 'npm install --global mocha'
       sh 'npm install -g mocha-junit-reporter'
     }
