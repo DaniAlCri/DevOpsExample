@@ -2,8 +2,11 @@ pipeline {
   agent any
 
   tools{
-      sh "npm install --global mocha"
-      sh "npm install -g mocha-junit-reporter"
+    node{
+      sh 'npm --version'
+      sh 'npm install --global mocha'
+      sh 'npm install -g mocha-junit-reporter'
+    }
   }
   stages {
     stage('build') {
@@ -15,7 +18,7 @@ pipeline {
 
     stage('test') {
       steps {
-        sh echo 'Test stage'
+        echo 'Test stage'
         sh 'npm test'
       }
     }
