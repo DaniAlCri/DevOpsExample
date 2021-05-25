@@ -3,7 +3,7 @@ pipeline {
 
   stages {
     stage('build') {
-      steps {
+      node {
         echo 'Build stage'
 
         env.NODEJS_HOME = "${tool 'Node 16.x'}"
