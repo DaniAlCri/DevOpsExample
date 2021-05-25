@@ -1,18 +1,16 @@
 pipeline {
   agent any
 
-  tools{
-    nodejs{
-      def nodeHome = tool name: 'node-14.17.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
-      bat 'npm install --global mocha'
-      bat 'npm install -g mocha-junit-reporter'
-    }
-  }
   stages {
     stage('build') {
       steps {
         echo 'Build stage'
-        bat "ls"
+        nodejs(nodeJSInstallationName: 'Node 14.x', configId: '<config-file-provider-id>') {
+          sh 'npm config ls'
+          bat 'npm install --global mocha'
+          bat 'npm install -g mocha-junit-reporter'
+        }
+        
       }
     }
 
