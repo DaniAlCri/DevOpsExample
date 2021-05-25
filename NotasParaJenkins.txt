@@ -4,7 +4,6 @@ https://www.blazemeter.com/blog/how-to-integrate-your-github-repository-to-your-
 
 Jenkinsfile para detectar cambios en el jenkinsfile y saltar al otro
     - https://www.bmc.com/blogs/ci-cd-pipeline-setup/ 
-
 Jenkinsfile para cuando se detecta un cambio en el git
 pipeline{ ...}
     agent any
@@ -14,7 +13,7 @@ pipeline{ ...}
         npm install --global mocha
         npm install -g mocha-junit-reporter
     }
-
+a
 Source - Se comprueba si el git ha cambiado. Arranca el resto del proceso
     -
 
