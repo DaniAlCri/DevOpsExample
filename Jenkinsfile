@@ -3,6 +3,7 @@ pipeline {
 
   tools{
     nodejs{
+      def nodeHome = tool name: 'node-14.17.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
       bat 'npm install --global mocha'
       bat 'npm install -g mocha-junit-reporter'
     }
