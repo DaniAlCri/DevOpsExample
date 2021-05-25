@@ -36,7 +36,8 @@ pipeline {
           //      body: "Everything is ok ${env.BUILD_URL}"
           emailext body: 'Test Message',
             subject: 'Test Subject',
-            to: 'dalvac01@estudiantes.unileon.es'
+            to: 'dalvarcristi@gmail.com'
+            //to: 'dalvac01@estudiantes.unileon.es'
         }
         failure {
             echo 'Failed test, sending mail to developer'
