@@ -29,7 +29,7 @@ pipeline {
   }
 
   post {
-        sucess{
+        success {
           echo 'Succesfull test'
         }
         failure {
