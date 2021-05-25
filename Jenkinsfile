@@ -3,17 +3,19 @@ pipeline {
 
   stages {
     stage('build') {
-      node {
+      steps {
         echo 'Build stage'
 
-        env.NODEJS_HOME = "${tool 'Node 16.x'}"
-        // on linux / mac
-        //env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
-        // on windows
-        env.PATH="${env.NODEJS_HOME};${env.PATH}"
-        sh 'npm --version'
-        //bat 'npm install --global mocha'
-        //bat 'npm install -g mocha-junit-reporter'
+        node{
+          env.NODEJS_HOME = "${tool 'Node 16.x'}"
+          // on linux / mac
+          //env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
+          // on windows
+          env.PATH="${env.NODEJS_HOME};${env.PATH}"
+          sh 'npm --version'
+          //bat 'npm install --global mocha'
+          //bat 'npm install -g mocha-junit-reporter'
+        }
         
       }
     }
