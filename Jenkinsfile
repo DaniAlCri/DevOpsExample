@@ -6,17 +6,9 @@ pipeline {
       steps {
         echo 'Build stage'
 
-        //node{
-          //env.NODEJS_HOME = "${tool 'Node 16.x'}"
-          // on linux / mac
-          //env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
-          // on windows
-          //env.PATH="${env.NODEJS_HOME};${env.PATH}"
         bat 'npm --version'
         bat 'npm install --global mocha'
-          //bat 'npm install -g mocha-junit-reporter'
-        //}
-        
+        bat 'npm install -g mocha-junit-reporter'        
       }
     }
   
