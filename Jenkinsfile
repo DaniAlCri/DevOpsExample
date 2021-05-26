@@ -40,9 +40,14 @@ pipeline {
           //  subject: 'Test Subject',
           //  to: 'dalvac01@estudiantes.unileon.es'
 
-          emailext body: "Everything is ok ${env.BUILD_URL}", 
-            subject: "Successful comit: ${currentBuild.fullDisplayName}",
-            to: 'debugthissheet@gmail.com'
+          //emailext body: "Everything is ok ${env.BUILD_URL}", 
+          //  subject: "Successful comit: ${currentBuild.fullDisplayName}",
+          //  to: 'debugthissheet@gmail.com'
+
+          emailext body: "Everything is ok ${env.BUILD_URL}",
+            recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+            [$class: 'RequesterRecipientProvider']], 
+            subject: "Successful comit: ${currentBuild.fullDisplayName}"
 
         }
         failure {
