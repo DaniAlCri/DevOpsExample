@@ -31,9 +31,10 @@ pipeline {
   post {
         success {
           echo 'Succesfull test'
-          //mail to: 'dalvac01@estudiantes.unileon.es',
-          //      subject: "Successful comit: ${currentBuild.fullDisplayName}",
-          //      body: "Everything is ok ${env.BUILD_URL}"
+          mail to: 'dalvac01@estudiantes.unileon.es',
+            subject: "Successful comit: ${currentBuild.fullDisplayName}",
+            body: "Everything is ok ${env.BUILD_URL}"
+
           emailext body: 'Test Message',
             subject: 'Test Subject',
             to: 'dalvac01@estudiantes.unileon.es'
