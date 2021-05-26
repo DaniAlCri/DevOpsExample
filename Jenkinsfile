@@ -40,7 +40,7 @@ pipeline {
           //  subject: 'Test Subject',
           //  to: 'dalvac01@estudiantes.unileon.es'
 
-          emailext body: 'A Test EMail', 
+          emailext body: 'A Test EMail from Jenkins', 
             subject: 'Test',
             to: 'debugthissheet@gmail.com'
 
