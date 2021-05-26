@@ -41,9 +41,8 @@ pipeline {
           //  to: 'dalvac01@estudiantes.unileon.es'
 
           emailext body: 'A Test EMail', 
-            recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-            [$class: 'RequesterRecipientProvider']], 
             subject: 'Test'
+            to: 'debugthissheet@gmail.com'
 
         }
         failure {
