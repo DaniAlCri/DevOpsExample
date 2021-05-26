@@ -40,7 +40,7 @@ pipeline {
           //  subject: 'Test Subject',
           //  to: 'dalvac01@estudiantes.unileon.es'
 
-          emailext body: 'A Test EMail from Jenkins', 
+          emailext body: 'Everything is ok ${env.BUILD_URL}', 
             subject: "Successful comit: ${currentBuild.fullDisplayName}",
             to: 'debugthissheet@gmail.com'
 
