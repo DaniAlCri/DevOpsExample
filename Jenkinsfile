@@ -41,7 +41,7 @@ pipeline {
           //  to: 'dalvac01@estudiantes.unileon.es'
 
           emailext body: 'A Test EMail', 
-            subject: 'Test'
+            subject: 'Test',
             to: 'debugthissheet@gmail.com'
 
         }
