@@ -23,6 +23,7 @@ pipeline {
     stage('deploy') {
       steps {
         echo 'Deploy stage'
+        echo 'Will be deployed'
       }
     }
 
@@ -39,7 +40,7 @@ pipeline {
             subject: "Successful in build ${currentBuild.fullDisplayName}"
 
         }
-        
+
         failure {
             echo 'Failed test, sending mail to developer'
 
