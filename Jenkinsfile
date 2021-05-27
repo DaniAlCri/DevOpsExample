@@ -39,6 +39,7 @@ pipeline {
             subject: "Successful in build ${currentBuild.fullDisplayName}"
 
         }
+        
         failure {
             echo 'Failed test, sending mail to developer'
 
