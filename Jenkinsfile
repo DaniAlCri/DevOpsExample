@@ -32,29 +32,20 @@ pipeline {
         success {
           echo 'Succesfull test'
 
-          //mail to: 'dalvac01@estudiantes.unileon.es',
-          //  subject: "Successful comit: ${currentBuild.fullDisplayName}",
-          //  body: "Everything is ok ${env.BUILD_URL}"
-
-          //emailext body: 'Test Message',
-          //  subject: 'Test Subject',
-          //  to: 'dalvac01@estudiantes.unileon.es'
-
-          //emailext body: "Everything is ok ${env.BUILD_URL}", 
-          //  subject: "Successful comit: ${currentBuild.fullDisplayName}",
-          //  to: 'debugthissheet@gmail.com'
-
+          //This message is only for debug. Will be removed in final versions.
           emailext body: "Everything is ok ${env.BUILD_URL}",
             recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
             [$class: 'RequesterRecipientProvider']], 
-            subject: "Successful comit: ${currentBuild.fullDisplayName}"
+            subject: "Successful in build ${currentBuild.fullDisplayName}"
 
         }
         failure {
             echo 'Failed test, sending mail to developer'
-            //mail to: 'dalvac01@estudiantes.unileon.es',
-            //    subject: "Failed commit: ${currentBuild.fullDisplayName}",
-            //    body: "Something is wrong with ${env.BUILD_URL}"
+
+            emailext body: "Build failure ${env.BUILD_URL}",
+            recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+            [$class: 'RequesterRecipientProvider']], 
+            subject: "Error in build ${currentBuild.fullDisplayName}"
         }
     }
 }
