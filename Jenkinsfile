@@ -17,6 +17,7 @@ pipeline {
       steps {
         echo 'Test stage'
         bat 'npm test'
+        echo 'Is this executed?'
       }
     }
 
