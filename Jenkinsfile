@@ -6,7 +6,7 @@ pipeline {
       steps {
         echo 'Build stage'
 
-        sh 'sudo apt-get install npm'
+        sh 'apt-get install npm'
         sh 'npm install --global mocha'
         sh 'npm install -g mocha-junit-reporter'
         sh 'npm --version'
