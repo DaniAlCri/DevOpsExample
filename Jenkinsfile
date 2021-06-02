@@ -6,9 +6,9 @@ pipeline {
       steps {
         echo 'Build stage'
 
-        bat 'npm install --global mocha'
-        bat 'npm install -g mocha-junit-reporter'
-        bat 'npm --version'
+        sh 'npm install --global mocha'
+        sh 'npm install -g mocha-junit-reporter'
+        sh 'npm --version'
       }
     }
   
@@ -16,7 +16,7 @@ pipeline {
     stage('test') {
       steps {
         echo 'Test stage'
-        bat 'npm test'
+        sh 'npm test'
       }
     }
 
