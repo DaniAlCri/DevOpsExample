@@ -3,14 +3,20 @@ pipeline {
 
   stages {
     stage('build') {
- 
+      agent{
+        docker {
+          image 'node:lts-buster-slim' 
+          args '-p 3000:3000' 
+        }
+      }
       steps {
         echo 'Build stage'
 
+
         //sh 'which npm'
-        sh '/usr/local/nvm/versions/node/v12.14.1/bin/npm install --global mocha'
-        sh '/usr/local/nvm/versions/node/v12.14.1/bin/npm install -g mocha-junit-reporter'
-        sh '/usr/local/nvm/versions/node/v12.14.1/bin/npm --version'
+        sh 'npm install --global mocha'
+        sh 'npm install -g mocha-junit-reporter'
+        sh 'npm --version'
       }
     }
   
@@ -18,7 +24,7 @@ pipeline {
     stage('test') {
       steps {
         echo 'Test stage'
-        sh '/usr/local/nvm/versions/node/v12.14.1/bin/npm test'
+        sh 'npm test'
       }
     }
 
