@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('build') {
       agent{
-        image 'node'
+        kubernetes 'node'
       }
       steps {
         echo 'Build stage'
