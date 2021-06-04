@@ -3,9 +3,7 @@ pipeline {
 
   stages {
     stage('build') {
-      agent{
-        kubernetes 'node'
-      }
+ 
       steps {
         echo 'Build stage'
 
