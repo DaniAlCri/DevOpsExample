@@ -3,6 +3,9 @@ pipeline {
 
   stages {
     stage('build') {
+      agent{
+        image 'node'
+      }
       steps {
         echo 'Build stage'
 
