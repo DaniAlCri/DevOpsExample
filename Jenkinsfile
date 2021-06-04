@@ -10,9 +10,9 @@ pipeline {
         echo 'Build stage'
 
         //sh 'which npm'
-        sh 'npm install --global mocha'
-        sh 'npm install -g mocha-junit-reporter'
-        sh 'npm --version'
+        sh '/usr/local/nvm/versions/node/v12.14.1/bin/npm install --global mocha'
+        sh '/usr/local/nvm/versions/node/v12.14.1/bin/npm install -g mocha-junit-reporter'
+        sh '/usr/local/nvm/versions/node/v12.14.1/bin/npm --version'
       }
     }
   
@@ -20,7 +20,7 @@ pipeline {
     stage('test') {
       steps {
         echo 'Test stage'
-        sh 'npm test'
+        sh '/usr/local/nvm/versions/node/v12.14.1/bin/npm test'
       }
     }
 
