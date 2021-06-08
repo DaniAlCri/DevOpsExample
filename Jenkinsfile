@@ -14,6 +14,7 @@ pipeline {
 
 
         //sh 'which npm'
+        sh 'ls'
         sh 'npm install --global mocha'
         sh 'npm install -g mocha-junit-reporter'
         sh 'npm --version'
