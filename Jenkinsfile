@@ -2,20 +2,22 @@ pipeline {
   agent any
 
   stages {
-    node(jenkins/jenkins-jenkins-agent){
-      stage('build') {
-        steps {
-          echo 'Build stage'
-
-
-          //sh 'which npm'
-          sh 'ls'
-          sh 'npm install --global mocha'
-          sh 'npm install -g mocha-junit-reporter'
-          sh 'npm --version'
+    stage('build') {
+      agent{
+        docker {
+          image 'node:lts-buster-slim' 
+          args '-p 3000:3000' 
         }
-      } 
-    
+      }
+      steps {
+        echo 'Build stage'
+
+
+        //sh 'which npm'
+        sh 'npm install --global mocha'
+        sh 'npm install -g mocha-junit-reporter'
+        sh 'npm --version'
+      }
     }
   
 
