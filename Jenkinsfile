@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('build') {
       agent{
-        label "cd-jenkins-agent"
+        label "cd-jenkins-jenkins-agent"
       }
       steps {
         echo 'Build stage'
