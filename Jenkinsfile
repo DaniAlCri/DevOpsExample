@@ -9,10 +9,9 @@ pipeline {
       steps {
         echo 'Build stage'
 
-        sh 'nvm install stable'
-        sh 'nvm alias default stable'
+        sh 'sudo apt install nodejs'
+        sh 'sudo apt install npm'
         sh 'node -v'
-        sh 'npm install'
         sh 'npm -V'
         //sh 'which npm'
         //sh 'npm install --global mocha'
