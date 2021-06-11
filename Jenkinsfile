@@ -9,8 +9,8 @@ pipeline {
       steps {
         echo 'Build stage'
 
-        sh 'apt-get update'
-        sh 'apt-get install npm'
+        sh 'sudo apt-get update'
+        sh 'sudo apt-get install npm'
         sh 'npm -V'
         //sh 'which npm'
         //sh 'npm install --global mocha'
