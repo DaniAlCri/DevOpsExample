@@ -9,9 +9,9 @@ pipeline {
       steps {
         echo 'Build stage'
 
-        sh 'sudo apt-get update'
-        sh 'sudo apt-get install npm'
-        sh 'npm -V'
+        nodejs(nodeJSInstallationName: 'Node 6.x', configId: '<config-file-provider-id>') {
+          sh 'npm config ls'
+        }
         //sh 'which npm'
         //sh 'npm install --global mocha'
         //sh 'npm install -g mocha-junit-reporter'
