@@ -1,21 +1,19 @@
 pipeline {
-  agent any
+  agent{
+    label "cd-jenkins-jenkins-agent"
+  }
 
   stages {
     stage('build') {
-      agent{
-        label "cd-jenkins-jenkins-agent"
-      }
+      
       steps {
         echo 'Build stage'
 
         nodejs(nodeJSInstallationName: 'NodeJs') {
           sh 'npm config ls'
         }
-        //sh 'which npm'
-        //sh 'npm install --global mocha'
-        //sh 'npm install -g mocha-junit-reporter'
-        //sh 'npm --version'
+        sh 'npm install --global mocha'
+        sh 'npm install -g mocha-junit-reporter'
       }
     }
   
