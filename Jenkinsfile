@@ -9,7 +9,7 @@ pipeline {
       steps {
         echo 'Build stage'
 
-        nodejs(nodeJSInstallationName: 'Node 6.x', configId: '<config-file-provider-id>') {
+        nodejs(nodeJSInstallationName: 'NodeJs', configId: '<config-file-provider-id>') {
           sh 'npm config ls'
         }
         //sh 'which npm'
