@@ -9,7 +9,7 @@ pipeline {
       steps {
         echo 'Build stage'
 
-        sh 'ls'
+        sh 'npm -V'
         //sh 'which npm'
         //sh 'npm install --global mocha'
         //sh 'npm install -g mocha-junit-reporter'
