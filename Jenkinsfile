@@ -43,20 +43,20 @@ pipeline {
           echo 'Succesfull test'
 
           //This message is only for debug. Will be removed in final versions.
-          emailext body: "Everything is ok ${env.BUILD_URL}",
-            recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-            [$class: 'RequesterRecipientProvider']], 
-            subject: "Successful in build ${currentBuild.fullDisplayName}"
+          //emailext body: "Everything is ok ${env.BUILD_URL}",
+            //recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+            //[$class: 'RequesterRecipientProvider']], 
+            //subject: "Successful in build ${currentBuild.fullDisplayName}"
 
         }
 
         failure {
-            echo 'Failed test, sending mail to developer'
+          echo 'Failed test, sending mail to developer'
 
-            //emailext body: "Build failure ${env.BUILD_URL}",
-            //recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-            //[$class: 'RequesterRecipientProvider']], 
-            //subject: "Error in build ${currentBuild.fullDisplayName}"
+          emailext body: "Build failure ${env.BUILD_URL}",
+            recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+            [$class: 'RequesterRecipientProvider']], 
+            subject: "Error in build ${currentBuild.fullDisplayName}"
         }
     }
 }
