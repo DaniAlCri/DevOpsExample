@@ -2,6 +2,12 @@ pipeline {
   agent{
     label "cd-jenkins-jenkins-agent"
   }
+  environment {
+        PROJECT_ID = '<YOUR_PROJECT_ID>'
+        CLUSTER_NAME = '<YOUR_CLUSTER_NAME>'
+        LOCATION = '<YOUR_CLUSTER_LOCATION>'
+        CREDENTIALS_ID = '<YOUR_CREDENTIAS_ID>'
+    }
 
   stages {
     stage('build') {
@@ -33,7 +39,15 @@ pipeline {
       steps {
         echo 'Deploy stage'
         echo 'Will be deployed'
-      }
+
+        $class: 'KubernetesEngineBuilder', 
+          projectId: env.PROJECT_ID, 
+          clusterName: env.CLUSTER_NAME, 
+          location: env.LOCATION, 
+          manifestPattern: 'manifest.yaml', 
+          credentialsId: env.CREDENTIALS_ID,
+          verifyDeployments: true])
+      
     }
 
   }
