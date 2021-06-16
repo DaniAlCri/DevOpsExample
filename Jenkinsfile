@@ -65,12 +65,12 @@ pipeline {
         }
 
         failure {
-            echo 'Failed test, sending mail to developer'
+          echo 'Failed test, sending mail to developer'
 
-            //emailext body: "Build failure ${env.BUILD_URL}",
-            //recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-            //[$class: 'RequesterRecipientProvider']], 
-            //subject: "Error in build ${currentBuild.fullDisplayName}"
+          emailext body: "Build failure ${env.BUILD_URL}",
+            recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+            [$class: 'RequesterRecipientProvider']], 
+            subject: "Error in build ${currentBuild.fullDisplayName}"
         }
     }
 }
