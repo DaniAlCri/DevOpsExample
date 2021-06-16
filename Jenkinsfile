@@ -21,6 +21,7 @@ pipeline {
           sh 'npm install -g mocha-junit-reporter'
         }
 
+
       }
     }
   
@@ -31,7 +32,6 @@ pipeline {
         nodejs(nodeJSInstallationName: 'NodeJs') {
           sh 'npm test'
         }
-        
       }
     }
 
