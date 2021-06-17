@@ -1,0 +1,6 @@
+Dockerfile
+Ignore.
+node_modules
+test
+Jenkinsfile
+npm-debug.log
