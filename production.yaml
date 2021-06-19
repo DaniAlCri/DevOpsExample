@@ -1,38 +1,19 @@
-#Source
-  #https://cloud.google.com/appengine/docs/standard/nodejs/config/appref?hl=es-419
-  # nodejs16, la versión ha cambiado desde la última actualización.
-  # Buscar qué hace falta para un servidor de nodejs exactamente.
-runtime: nodejs14 # or another supported version
-
-instance_class: F2
-
-env_variables:
-  BUCKET_NAME: "example-gcs-bucket"
-
-handlers:
-- url: /stylesheets
-  static_dir: stylesheets
-
-- url: /.*
-  secure: always
-  redirect_http_response_code: 301
-  script: auto
-
-# https://www.magalix.com/blog/nodejs-app-sample-from-docker-to-kubernetes-cluster
-
-  apiVersion: apps/v1
+apiVersion: apps/v1 # Usa apps/v1beta2 para versiones anteriores a 1.9.0
 kind: Deployment
 metadata:
-  name: nodejs-deployment
+  name: nginx-deployment
 spec:
-  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 1 # indica al controlador que ejecute 2 pods
   template:
     metadata:
       labels:
-        app: nodejs
+        app: nginx
     spec:
       containers:
-      - name: nodongo
-        image: zarakmughal/nodejs-starter:1.0
+      - name: nginx
+        image: nginx:1.8
         ports:
-        - containerPort: 3000
+        - containerPort: 80
