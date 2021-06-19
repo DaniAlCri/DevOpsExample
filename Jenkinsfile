@@ -2,13 +2,13 @@ pipeline {
   agent{
     label "cd-jenkins-jenkins-agent"
   }
-  environment {
+  /*environment {
         PROJECT_ID = '$(gcloud info --format='value(config.project)')'
         CLUSTER_NAME = 'production'
         LOCATION = 'europe-west1-b'
         CREDENTIALS_ID = '<YOUR_CREDENTIAS_ID>'
     }
-
+  */
   stages {
     stage('build') {
       
@@ -40,13 +40,18 @@ pipeline {
         echo 'Deploy stage'
         echo 'Will be deployed'
 
-        $class: 'KubernetesEngineBuilder', 
+        /*$class: 'KubernetesEngineBuilder', 
           projectId: env.PROJECT_ID, 
           clusterName: env.CLUSTER_NAME, 
           location: env.LOCATION, 
           manifestPattern: 'manifest.yaml', 
           credentialsId: env.CREDENTIALS_ID,
-          verifyDeployments: true])
+          verifyDeployments: true])*/
+
+        // https://github.com/jenkinsci/kubernetes-plugin/
+        node(deploy_pod){
+          sh 'http server'
+        }
       
     }
 
