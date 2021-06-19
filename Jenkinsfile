@@ -3,9 +3,15 @@ pipeline {
     label "cd-jenkins-jenkins-agent"
   }
   environment {
-        PROJECT_ID = '<YOUR_PROJECT_ID>'
-        CLUSTER_NAME = '<YOUR_CLUSTER_NAME>'
-        LOCATION = '<YOUR_CLUSTER_LOCATION>'
+export PROJECT=$(gcloud info --format='value(config.project)')
+export CLUSTER=production
+export ZONE=europe-west1-b
+export SA=proyectokubernetes
+export SA_EMAIL=${SA}@${PROJECT}.iam.gserviceaccount.com
+
+        PROJECT_ID = '$(gcloud info --format='value(config.project)')'
+        CLUSTER_NAME = 'production'
+        LOCATION = 'europe-west1-b'
         CREDENTIALS_ID = '<YOUR_CREDENTIAS_ID>'
     }
 
