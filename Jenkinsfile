@@ -52,7 +52,7 @@ pipeline {
         node(deploy_pod){
           sh 'http server'
         }
-      
+      }
     }
 
   }
