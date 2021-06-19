@@ -23,5 +23,8 @@
   "homepage": "https://github.com/DaniAlCri/DevOpsExample#readme",
   "devDependencies": {
     "mocha-junit-reporter": "^2.0.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
