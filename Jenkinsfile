@@ -26,18 +26,21 @@ pipeline {
     }
 
     stage('deploy') {
-      agent {
+      /*agent {
         node {
           label 'deploy_pod'
         }
 
-      }
+      }*/
       steps {
         echo 'Deploy stage'
         echo 'Will be deployed'
-        node(label: deploy_pod) {
+        /*node(label: deploy_pod) {
           sh 'http server'
-        }
+        }*/
+        sh 'npm install'
+        sh 'npm install --global http-server'
+        sh 'http-server'
 
       }
     }

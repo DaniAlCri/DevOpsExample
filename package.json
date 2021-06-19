@@ -25,6 +25,7 @@
     "mocha-junit-reporter": "^2.0.0"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "http-server": "^0.12.3"
   }
 }
