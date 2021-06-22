@@ -6,7 +6,7 @@ pipeline {
     stage('build') {
       steps {
         echo 'Build stage'
-        nodejs('NodeJs') {
+        nodejs('nodejs') {
           sh 'npm config ls'
           sh 'npm install --global mocha'
           sh 'npm install -g mocha-junit-reporter'
@@ -18,7 +18,7 @@ pipeline {
     stage('test') {
       steps {
         echo 'Test stage'
-        nodejs('NodeJs') {
+        nodejs('nodejs') {
           sh 'npm test'
         }
 
@@ -49,14 +49,14 @@ pipeline {
   post {
     success {
       echo 'Succesfull test'
-      emailext(body: "Everything is ok ${env.BUILD_URL}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-                  [$class: 'RequesterRecipientProvider']], subject: "Successful in build ${currentBuild.fullDisplayName}")
+      //emailext(body: "Everything is ok ${env.BUILD_URL}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+      //            [$class: 'RequesterRecipientProvider']], subject: "Successful in build ${currentBuild.fullDisplayName}")
     }
 
     failure {
       echo 'Failed test, sending mail to developer'
-      emailext(body: "Build failure ${env.BUILD_URL}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-                  [$class: 'RequesterRecipientProvider']], subject: "Error in build ${currentBuild.fullDisplayName}")
+      //emailext(body: "Build failure ${env.BUILD_URL}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+      //            [$class: 'RequesterRecipientProvider']], subject: "Error in build ${currentBuild.fullDisplayName}")
     }
 
   }
