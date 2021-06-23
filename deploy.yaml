@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: node-app-deployment
+  name: add-webpage
   labels:
     app: node-app
 spec:
@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: node-app
-        image: #path to your docker image
+        image: node #path to your docker image
         ports:
         - containerPort: 8080
