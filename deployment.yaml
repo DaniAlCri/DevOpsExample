@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: add-webpage-deploy
+  name: addwebpage-deploy
   labels:
     app: node-app
 spec:
