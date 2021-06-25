@@ -6,7 +6,7 @@ function add(text) {
 
 	numbers = text.split(" ");
 
-	//Correct code. This is the valid solution
+	//Correct code. This is the valid solution 
 	for (var x of numbers)
 		if(Number.isInteger(Number.parseInt(x)))
 			result += Number.parseInt(x);
