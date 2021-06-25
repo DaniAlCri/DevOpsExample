@@ -15,6 +15,7 @@ pipeline {
           sh 'npm config ls'
           sh 'npm install --global mocha'
           sh 'npm install -g mocha-junit-reporter'
+          sh 'sudo apt-get install docker'
         }
 
       }
@@ -36,7 +37,7 @@ pipeline {
         echo 'Deploy stage'
         echo "Build number = ${env.BUILD_NUMBER}"
 
-        sh 'sudo apt-get install docker'
+        
 
         script{
           app = docker.build("${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}")
