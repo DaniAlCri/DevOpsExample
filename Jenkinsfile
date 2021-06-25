@@ -1,6 +1,7 @@
 pipeline {
   agent {
-    label 'cd-jenkins-jenkins-agent'
+    //label 'cd-jenkins-jenkins-agent'
+    label 'docker'
   }
   environment {
     PROJECT_ID  = 'proyectokubernetes-301509'
@@ -35,8 +36,6 @@ pipeline {
       steps {
         echo 'Deploy stage'
         echo "Build number = ${env.BUILD_NUMBER}"
-
-        sh 'sudo apt-get install docker'
 
         script{
           app = docker.build("${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}")
