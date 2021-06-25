@@ -2,11 +2,9 @@ function add(text) {
 	var result = 0
 	var numbers
 
-	console.log('script loaded');
-
 	numbers = text.split(" ");
 
-	//Correct code. This is the valid solution 
+	//Correct code. This is the valid solution
 	for (var x of numbers)
 		if(Number.isInteger(Number.parseInt(x)))
 			result += Number.parseInt(x);

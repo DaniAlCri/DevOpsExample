@@ -4,10 +4,6 @@ var express = require('express');
      res.sendFile(__dirname+'/www/AddWebpage.html');
  });
 
- /*app.get('/AddWebpage.html', function(req,res){
-  res.app('/AddScript.js');
- });*/
-
  app.use(express.static(__dirname + '/www'));
 
  //app.listen(8081);

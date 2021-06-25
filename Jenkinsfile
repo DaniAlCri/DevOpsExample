@@ -2,6 +2,11 @@ pipeline {
   agent {
     label 'cd-jenkins-jenkins-agent'
   }
+  environment {
+    PROJECT_ID  = 'proyectokubernetes-301509'
+    ACTUAL_VERSION = 'v1'
+  }
+
   stages {
     stage('build') {
       steps {
@@ -26,21 +31,20 @@ pipeline {
     }
 
     stage('deploy') {
-      /*agent {
-        node {
-          label 'deploy_pod'
-        }
-
-      }*/
+      
       steps {
         echo 'Deploy stage'
         echo 'Will be deployed'
         /*node(label: deploy_pod) {
           sh 'http server'
         }*/
-        sh 'npm install'
-        sh 'npm install --global http-server'
-        sh 'http-server'
+        sh "docker build -t gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION} ."
+        sh "docker push gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION}"
+        sh "kubectl create deployment addwebpage-app --image=gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION}"
+        sh "kubectl expose deployment addwebpage-app --name=hello-app-service --type=LoadBalancer --port 80 --target-port 8081"
+        sh "kubectl get services"
+
+
 
       }
     }
