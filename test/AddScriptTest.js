@@ -3,7 +3,7 @@
 //import AddScript from '../AddScript.js';
 
 const assert = require('assert');
-const AddScript = require ('../AddScript.js');
+const AddScript = require ('../www/js/AddScript.js');
 
 var result = 5;
 
