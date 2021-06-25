@@ -37,7 +37,7 @@ pipeline {
         echo "Build number = ${env.BUILD_NUMBER}"
 
         script{
-          app = docker.build("${PROJECT_ID}/addwebpage")
+          app = docker.build("${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}")
           docker.withRegistry("eu.gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION}", git){
             app.push("${env.BUILD_NUMBER}") 
             app.push('latest')
