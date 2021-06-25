@@ -6,10 +6,6 @@ pipeline {
     PROJECT_ID  = 'proyectokubernetes-301509'
     ACTUAL_VERSION = 'v1'
   }
-  tools {
-    docker 'docker'
-    nodejs 'nodejs'
-  }
 
   stages {
     stage('build') {
@@ -38,13 +34,20 @@ pipeline {
       
       steps {
         echo 'Deploy stage'
+        echo "Build number = ${env.BUILD_NUMBER}"
 
+        docker.build('./')
+        docker.withRegistry("eu.gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION}", git){
+          app.push("${env.BUILD_NUMBER}") 
+          app.push('latest')
 
-        sh "docker build -t gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION} ."
-        sh "docker push gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION}"
-        sh "kubectl create deployment addwebpage-app --image=gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION}"
-        sh "kubectl expose deployment addwebpage-app --name=hello-app-service --type=LoadBalancer --port 80 --target-port 8081"
-        sh "kubectl get services"
+        }
+        
+        //sh "docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION} ."
+        //sh "docker push eu.gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION}"
+        //sh "kubectl create deployment addwebpage-app --image=eu.gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION}"
+        //sh "kubectl expose deployment addwebpage-app --name=addwebpage-app-service --type=LoadBalancer --port 80 --target-port 8081"
+        //sh "kubectl get services"
 
 
 
