@@ -4,7 +4,6 @@ pipeline {
   }
   environment {
     PROJECT_ID  = 'proyectokubernetes-301509'
-    ACTUAL_VERSION = 'v1'
   }
 
   stages {
@@ -37,9 +36,9 @@ pipeline {
         echo "Build number = ${env.BUILD_NUMBER}"
 
         script{
-          app = docker.build("${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}")
-          docker.withRegistry("eu.gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION}", git){
-            app.push("${env.BUILD_NUMBER}") 
+          app = docker.build("eu.gcr.io/${PROJECT_ID}/addwebpage:B${env.BUILD_NUMBER}")
+          docker.withRegistry("eu.gcr.io/${PROJECT_ID}/addwebpage:B${env.BUILD_NUMBER}", git){
+            app.push("B${env.BUILD_NUMBER}") 
             app.push('latest')
 
           }
