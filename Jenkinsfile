@@ -1,6 +1,7 @@
 pipeline {
   agent {
-    label 'cd-jenkins-jenkins-agent'
+    //label 'cd-jenkins-jenkins-agent'
+    label 'docker'
   }
   environment {
     PROJECT_ID  = 'proyectokubernetes-301509'
