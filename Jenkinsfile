@@ -6,7 +6,7 @@ pipeline {
     PROJECT_ID  = 'proyectokubernetes-301509'
     ACTUAL_VERSION = 'v1'
   }
-  tool{
+  tools {
     docker 'docker'
     nodejs 'nodejs'
   }
