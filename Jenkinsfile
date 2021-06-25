@@ -36,11 +36,13 @@ pipeline {
         echo 'Deploy stage'
         echo "Build number = ${env.BUILD_NUMBER}"
 
-        docker.build('./')
-        docker.withRegistry("eu.gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION}", git){
-          app.push("${env.BUILD_NUMBER}") 
-          app.push('latest')
+        script{
+          docker.build('./')
+          docker.withRegistry("eu.gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION}", git){
+            app.push("${env.BUILD_NUMBER}") 
+            app.push('latest')
 
+          }
         }
         
         //sh "docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION} ."
