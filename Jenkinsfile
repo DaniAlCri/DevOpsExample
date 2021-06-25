@@ -34,11 +34,9 @@ pipeline {
       
       steps {
         echo 'Deploy stage'
-        echo 'Will be deployed'
-        /*node(label: deploy_pod) {
-          sh 'http server'
-        }*/
-        sh "docker build -t gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION} ."
+        
+        docker.build("eu.gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION}", 'target/docker')
+        //sh "docker build -t gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION} ."
         sh "docker push gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION}"
         sh "kubectl create deployment addwebpage-app --image=gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION}"
         sh "kubectl expose deployment addwebpage-app --name=hello-app-service --type=LoadBalancer --port 80 --target-port 8081"
