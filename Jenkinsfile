@@ -15,7 +15,7 @@ pipeline {
           sh 'npm config ls'
           sh 'npm install --global mocha'
           sh 'npm install -g mocha-junit-reporter'
-          sh 'apt-get install docker'
+          sh 'sudo apt-get install docker'
         }
 
       }
