@@ -34,9 +34,10 @@ pipeline {
       agent {
         docker { image 'node:14-alpine' }
       }
-      stage('Test') {
-        steps {
-            
+      
+      steps {
+        step{
+          
           echo 'Deploy stage'
           echo "Build number = ${env.BUILD_NUMBER}"
           script{
@@ -47,9 +48,9 @@ pipeline {
 
             }
           }
-
         }
       }
+      
       
 
       /*steps {
