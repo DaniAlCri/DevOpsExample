@@ -41,8 +41,10 @@ pipeline {
         echo "Build number = ${env.BUILD_NUMBER}"
         
         //container('docker'){
+        post{
         sh '''
           ls
+          docker version
           docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER} ."
           docker push eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
           docker push eu.gcr.io/${PROJECT_ID}/addwebpage:latest"
@@ -50,6 +52,7 @@ pipeline {
           kubectl get services
         '''
         //}
+        }
         
       }
       
