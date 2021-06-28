@@ -41,7 +41,7 @@ pipeline {
         echo "Build number = ${env.BUILD_NUMBER}"
         
         //container('docker'){
-        post{
+        
         sh '''
           ls
           docker version
@@ -52,7 +52,7 @@ pipeline {
           kubectl get services
         '''
         //}
-        }
+        
         
       }
       
