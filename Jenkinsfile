@@ -40,7 +40,7 @@ pipeline {
         echo 'Deploy stage'
         echo "Build number = ${env.BUILD_NUMBER}"
         
-        container('Docker'){
+        container('docker'){
           sh "docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER} ."
           sh "docker push eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
           sh "docker push eu.gcr.io/${PROJECT_ID}/addwebpage:latest"
