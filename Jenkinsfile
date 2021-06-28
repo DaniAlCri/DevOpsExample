@@ -31,9 +31,9 @@ pipeline {
 
     stage('deploy') {
       
-      agent {
+      /*agent {
         dockerfile { filename 'Dockerfile' }
-      }
+      }*/
       
       steps {
                 
