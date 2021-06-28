@@ -33,7 +33,7 @@ pipeline {
       
       agent {
         docker { 
-          filename 'Dockerfile'
+          image 'Dockerfile'
           args '--privileged'
         }
       }
