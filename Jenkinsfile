@@ -2,6 +2,9 @@ pipeline {
   agent {
     label 'cd-jenkins-jenkins-agent'
   }
+  tools { 
+    docker 'latest'
+  }
   environment {
     PROJECT_ID  = 'proyectokubernetes-301509'
   }
