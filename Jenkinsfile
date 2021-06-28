@@ -32,7 +32,7 @@ pipeline {
     stage('deploy') {
       
       agent {
-        docker { dockerfile true }
+        docker { imgae 'node:10' }
       }
       
       steps {
