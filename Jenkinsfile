@@ -32,7 +32,10 @@ pipeline {
     stage('deploy') {
       
       agent {
-        docker { image 'node:10' }
+        docker { 
+          filename 'Dockerfile'
+          args '--privileged'
+        }
       }
       
       steps {
