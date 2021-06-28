@@ -41,14 +41,11 @@ pipeline {
         echo "Build number = ${env.BUILD_NUMBER}"
         
         container('Docker'){
-          //script{
-            app = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:B${env.BUILD_NUMBER}"
-            docker.withRegistry("eu.gcr.io/${PROJECT_ID}/addwebpage:B${env.BUILD_NUMBER}", git){
-              app.push("B${env.BUILD_NUMBER}") 
-              app.push('latest')
-
-            }
-          //}
+          sh "docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION} ."
+          sh "docker push eu.gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION}"
+          sh "kubectl create deployment addwebpage-app --image=eu.gcr.io/${PROJECT_ID}/addwebpage:${ACTUAL_VERSION}"
+          sh "kubectl expose deployment addwebpage-app --name=addwebpage-app-service --type=LoadBalancer --port 80 --target-port 8081"
+          sh "kubectl get services"
         }
         
       }
