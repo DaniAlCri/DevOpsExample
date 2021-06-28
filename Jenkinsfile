@@ -39,7 +39,8 @@ pipeline {
                 
         echo 'Deploy stage'
         echo "Build number = ${env.BUILD_NUMBER}"
-        script{
+        
+        docker.image('maven:3.3.3-jdk-8').inside {
           app = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:B${env.BUILD_NUMBER}"
           docker.withRegistry("eu.gcr.io/${PROJECT_ID}/addwebpage:B${env.BUILD_NUMBER}", git){
             app.push("B${env.BUILD_NUMBER}") 
@@ -47,6 +48,14 @@ pipeline {
 
           }
         }
+        /*script{
+          app = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:B${env.BUILD_NUMBER}"
+          docker.withRegistry("eu.gcr.io/${PROJECT_ID}/addwebpage:B${env.BUILD_NUMBER}", git){
+            app.push("B${env.BUILD_NUMBER}") 
+            app.push('latest')
+
+          }
+        }*/
         
       }
       
