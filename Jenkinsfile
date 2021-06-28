@@ -31,9 +31,9 @@ pipeline {
 
     stage('deploy') {
       
-      agent {
-        docker { image 'node:14-alpine' }
-      }
+      //agent {
+      //  docker { image 'node:14-alpine' }
+      //}
       
       steps {
                 
