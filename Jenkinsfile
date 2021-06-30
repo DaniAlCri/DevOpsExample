@@ -49,6 +49,7 @@ pipeline {
         echo "Image tag = ${IMAGE_TAG}"
         
         withEnv(['GCLOUD_PATH=/var/jenkins_home/google-cloud-sdk/bin']) {
+          sh 'ls'
           sh '$GCLOUD_PATH/gcloud --version'
         }
 
