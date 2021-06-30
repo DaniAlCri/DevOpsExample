@@ -53,6 +53,11 @@ pipeline {
           sh '$GCLOUD_PATH/gcloud --version'
         }*/
 
+        withNPM(npmrcConfig:'nodejs') {
+            echo "Performing npm build..."
+            sh 'npm install'
+        }
+
         sh """
           npm install 
           #!/bin/bash 
