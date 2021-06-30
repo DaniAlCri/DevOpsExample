@@ -40,9 +40,9 @@ pipeline {
       /*agent {
         dockerfile { filename 'Dockerfile' }
       }*/
-      agent {
+      /*agent {
         label 'gcloud-builder'
-      }
+      }*/
       
       
       steps {
@@ -57,7 +57,7 @@ pipeline {
         }*/
 
       
-        sh """
+        /*sh """
           
           #!/bin/bash 
           echo "deploy stage";
@@ -79,12 +79,12 @@ pipeline {
           gcloud config list;
           gcloud app deploy --version=v01;
           echo "Deployed to GCP"
-        """
+        """*/
       
 //gcloud auth activate-service-account --key-file ${GOOGLE_SERVICE_ACCOUNT_KEY};
 
         echo 'container finished'
-        /*script{ //container('docker') { 
+        script{ //container('docker') { 
 
         sh '''
           ls
@@ -97,7 +97,7 @@ pipeline {
           kubectl create deployment addwebpage-app --image=eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}
           kubectl get services
         '''
-        }*/
+        }
         
         
       }
