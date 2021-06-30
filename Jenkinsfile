@@ -40,6 +40,9 @@ pipeline {
       /*agent {
         dockerfile { filename 'Dockerfile' }
       }*/
+      agent {
+        label 'gcloud-builder'
+      }
       
       
       steps {
