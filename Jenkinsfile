@@ -60,12 +60,8 @@ pipeline {
             tar -xvf /tmp/google-cloud-sdk.tar.gz -C /tmp/;
             /tmp/google-cloud-sdk/install.sh -q;
 
-                        source /tmp/google-cloud-sdk/path.bash.inc;
-
-
              gcloud config set project ${PROJECT_ID};
-             gcloud components install app-engine-java;
-             gcloud components install app-engine-python;
+             gcloud components install kubectl;
              
 
              gcloud config list;
