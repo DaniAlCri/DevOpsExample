@@ -51,7 +51,7 @@ pipeline {
         echo "Image tag = ${IMAGE_TAG}"
         
         //container('gcloud') {
-        sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${IMAGE_TAG} ."
+        //sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${IMAGE_TAG} ."
         //}
 
         echo 'container finished'
