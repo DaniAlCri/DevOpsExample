@@ -48,15 +48,15 @@ pipeline {
         echo "Build number = ${env.BUILD_NUMBER}"
         echo "Image tag = ${IMAGE_TAG}"
         
-        withEnv(['GCLOUD_PATH=/var/jenkins_home/google-cloud-sdk/bin']) {
+        /*withEnv(['GCLOUD_PATH=/var/jenkins_home/google-cloud-sdk/bin']) {
           sh 'ls'
           sh '$GCLOUD_PATH/gcloud --version'
-        }
-
-        //container('gcloud') {
-        /*withEnv(['GCLOUD_PATH=/var/jenkins_home/google-cloud-sdk/bin']) {
-          sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${IMAGE_TAG} ."
         }*/
+
+        container('gcloud') {
+        ithEnv(['GCLOUD_PATH=/var/jenkins_home/google-cloud-sdk/bin']) {
+          sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${IMAGE_TAG} ."
+        }
         //sh "gcloud builds submit --config . ."
 
         echo 'container finished'
