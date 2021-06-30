@@ -44,10 +44,12 @@ pipeline {
         
         sh '''
           ls
+          echo start building
           docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER} /
-          docker push eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
-          docker push eu.gcr.io/${PROJECT_ID}/addwebpage:latest"
-          kubectl create deployment addwebpage-app --image=eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
+          echo Build success
+          docker push eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}
+          docker push eu.gcr.io/${PROJECT_ID}/addwebpage:latest
+          kubectl create deployment addwebpage-app --image=eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}
           kubectl get services
         '''
         }
