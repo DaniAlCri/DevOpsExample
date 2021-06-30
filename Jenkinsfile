@@ -40,7 +40,7 @@ pipeline {
         echo 'Deploy stage'
         echo "Build number = ${env.BUILD_NUMBER}"
         
-        node('docker'){
+        docker('docker'){
         
         sh '''
           ls
