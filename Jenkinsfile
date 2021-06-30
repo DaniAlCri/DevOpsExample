@@ -49,8 +49,9 @@ pipeline {
         echo "Image tag = ${IMAGE_TAG}"
         
         //container('gcloud') {
-        sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${IMAGE_TAG} ."
-        //}
+        withEnv(['GCLOUD_PATH=/var/jenkins_home/google-cloud-sdk/bin']) {
+          sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${IMAGE_TAG} ."
+        }
         //sh "gcloud builds submit --config . ."
 
         echo 'container finished'
