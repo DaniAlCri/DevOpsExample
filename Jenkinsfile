@@ -35,7 +35,7 @@ pipeline {
         dockerfile { filename 'Dockerfile' }
       }*/
       agent {
-        docker { label 'docker:dind'}
+        docker { image 'docker:dind'}
       }
       
       steps {
