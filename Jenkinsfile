@@ -63,15 +63,16 @@ pipeline {
                         source /tmp/google-cloud-sdk/path.bash.inc;
 
 
-             gcloud config set project ${GOOGLE_PROJECT_ID};
+             gcloud config set project ${PROJECT_ID};
              gcloud components install app-engine-java;
              gcloud components install app-engine-python;
-             gcloud auth activate-service-account --key-file ${GOOGLE_SERVICE_ACCOUNT_KEY};
+             
 
              gcloud config list;
              gcloud app deploy --version=v01;
                          echo "Deployed to GCP"
         """
+//gcloud auth activate-service-account --key-file ${GOOGLE_SERVICE_ACCOUNT_KEY};
 
         echo 'container finished'
         /*script{ //container('docker') { 
