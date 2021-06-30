@@ -4,6 +4,12 @@ pipeline {
   }
   environment {
     PROJECT_ID  = 'proyectokubernetes-301509'
+    APP_NAME = "addwebpage"
+    FE_SVC_NAME = "${APP_NAME}-frontend"
+    CLUSTER = "jenkins-cd"
+    CLUSTER_ZONE = "eu-west1-b"
+    IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+    JENKINS_CRED = "${PROJECT}"
   }
 
   stages {
@@ -35,63 +41,30 @@ pipeline {
         dockerfile { filename 'Dockerfile' }
       }*/
       agent {
-        kubernetes {
-          label 'spring-petclinic-demo'
-          defaultContainer 'jnlp'
-          yaml """
-            apiVersion: v1
-            kind: Pod
-            metadata:
-            labels:
-              component: ci
-            spec:
-              # Use service account that can deploy to all namespaces
-              serviceAccountName: cd-jenkins
-              containers:
-              - name: maven
-                image: maven:latest
-                command:
-                - cat
-                tty: true
-                volumeMounts:
-                  - mountPath: "/root/.m2"
-                    name: m2
-              - name: docker
-                image: docker:latest
-                command:
-                - cat
-                tty: true
-                volumeMounts:
-                - mountPath: /var/run/docker.sock
-                  name: docker-sock
-              volumes:
-                - name: docker-sock
-                  hostPath:
-                    path: /var/run/docker.sock
-                - name: m2
-                  persistentVolumeClaim:
-                    claimName: m2
-            """
-          }
-        }
+        docker { image 'docker'}
+      }
       
       steps {
                 
         echo 'Deploy stage'
         echo "Build number = ${env.BUILD_NUMBER}"
         
+        container('gcloud') {
+          sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${IMAGE_TAG} ."
+        }
+
         script{ //container('docker') { 
 
         //docker.build("eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}")
 
         sh '''
           ls
-          docker run -v /var/run/docker.sock:/var/run/docker.sock -ti docker
+          
           echo start building
           docker.build -t eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER} /
           echo Build success
           docker push eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}
-          docker push eu.gcr.io/${PROJECT_ID}/addwebpage:latest
+          docker push eu.gcr.io/${PROJECT_ID}/addwebpage:
           kubectl create deployment addwebpage-app --image=eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}
           kubectl get services
         '''
