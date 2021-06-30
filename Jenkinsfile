@@ -54,7 +54,7 @@ pipeline {
         }*/
 
         container('gcloud') {
-        ithEnv(['GCLOUD_PATH=/var/jenkins_home/google-cloud-sdk/bin']) {
+          //withEnv(['GCLOUD_PATH=/var/jenkins_home/google-cloud-sdk/bin']) {
           sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${IMAGE_TAG} ."
         }
         //sh "gcloud builds submit --config . ."
