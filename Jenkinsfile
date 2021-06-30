@@ -35,7 +35,7 @@ pipeline {
         dockerfile { filename 'Dockerfile' }
       }*/
       agent {
-        docker { image 'docker:dind'}
+        docker { image 'docker'}
       }
       
       steps {
@@ -49,6 +49,7 @@ pipeline {
 
         sh '''
           ls
+          docker run -v /var/run/docker.sock:/var/run/docker.sock -ti docker
           echo start building
           docker.build -t eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER} /
           echo Build success
