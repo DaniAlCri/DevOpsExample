@@ -47,8 +47,9 @@ pipeline {
         echo 'Deploy stage'
         echo "Build number = ${env.BUILD_NUMBER}"
         echo "Image tag = ${IMAGE_TAG}"
-        
-        withEnv(['GCLOUD_PATH=/var/jenkins_home/google-cloud-sdk/bin']) {
+
+        // /var/jenkins_home/google-cloud-sdk/bin']) {
+        withEnv(['GCLOUD_PATH=/home/dalvac01/"]) { 
           sh 'ls'
           sh '$GCLOUD_PATH/gcloud --version'
         }
