@@ -40,9 +40,7 @@ pipeline {
       /*agent {
         dockerfile { filename 'Dockerfile' }
       }*/
-      agent {
-        docker { image 'docker'}
-      }
+      
       
       steps {
                 
@@ -51,8 +49,9 @@ pipeline {
         echo "Image tag = ${IMAGE_TAG}"
         
         //container('gcloud') {
-        //sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${IMAGE_TAG} ."
+        sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${IMAGE_TAG} ."
         //}
+        //sh "gcloud builds submit --config . ."
 
         echo 'container finished'
         /*script{ //container('docker') { 
