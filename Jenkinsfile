@@ -53,7 +53,9 @@ pipeline {
           sh '$GCLOUD_PATH/gcloud --version'
         }*/
 
-        withNPM(npmrcConfig:'nodejs') {
+        build ${IMAGE_TAG} .
+
+        /*withNPM(npmrcConfig:'nodejs') {
             echo "Performing npm build..."
             sh 'npm install'
         }
@@ -79,6 +81,7 @@ pipeline {
           gcloud app deploy --version=v01;
           echo "Deployed to GCP"
         """
+        */
 //gcloud auth activate-service-account --key-file ${GOOGLE_SERVICE_ACCOUNT_KEY};
 
         echo 'container finished'
