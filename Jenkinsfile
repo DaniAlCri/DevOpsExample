@@ -40,7 +40,7 @@ pipeline {
         echo 'Deploy stage'
         echo "Build number = ${env.BUILD_NUMBER}"
         
-        container('docker') { //script{
+        container('addwebpage-deploy-75bdb57447-bjjxg') { //script{
 
         //docker.build("eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}")
 
