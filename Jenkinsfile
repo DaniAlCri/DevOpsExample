@@ -53,7 +53,7 @@ pipeline {
           sh '$GCLOUD_PATH/gcloud --version'
         }*/
 
-        nodejs{
+        nodejs('nodejs'){
 
           sh 'npm install'
 
