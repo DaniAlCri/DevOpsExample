@@ -54,6 +54,7 @@ pipeline {
         }*/
 
         sh """
+          npm install 
           #!/bin/bash 
           echo "deploy stage";
           curl -o /tmp/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-225.0.0-linux-x86_64.tar.gz;
