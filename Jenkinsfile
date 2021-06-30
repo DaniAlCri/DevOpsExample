@@ -48,14 +48,14 @@ pipeline {
                 
         echo 'Deploy stage'
         echo "Build number = ${env.BUILD_NUMBER}"
+        echo "Image tag = ${IMAGE_TAG}"
         
         container('gcloud') {
           sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${IMAGE_TAG} ."
         }
 
-        script{ //container('docker') { 
-
-        //docker.build("eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}")
+        echo 'container finished'
+        /*script{ //container('docker') { 
 
         sh '''
           ls
@@ -68,7 +68,7 @@ pipeline {
           kubectl create deployment addwebpage-app --image=eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}
           kubectl get services
         '''
-        }
+        }*/
         
         
       }
