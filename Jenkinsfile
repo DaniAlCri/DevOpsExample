@@ -84,6 +84,8 @@ pipeline {
         script{ //container('docker') { 
 
         sh '''
+          apt-get update
+          apt-get install docker
           ls
           docker --version
           echo start building
