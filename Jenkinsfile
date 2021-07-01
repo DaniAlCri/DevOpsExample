@@ -47,8 +47,8 @@ pipeline {
         echo "Build number = ${env.BUILD_NUMBER}"
         echo "Image tag = ${IMAGE_TAG}"
 
-        docker('docker'){
-          //docker.withServer('http://cd-jenkins.default.svc.cluster.local:8080/') {
+        //docker('docker'){
+        docker.withServer('tcp://cd-jenkins.default.svc.cluster.local:8080/') {
           docker.build eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}
             
           //}
