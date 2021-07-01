@@ -47,41 +47,11 @@ pipeline {
         echo 'Deploy stage'
         echo "Build number = ${env.BUILD_NUMBER}"
         echo "Image tag = ${IMAGE_TAG}"
-        
-        /*withEnv(['GCLOUD_PATH=/var/jenkins_home/google-cloud-sdk/bin']) {
-          sh 'ls'
-          sh '$GCLOUD_PATH/gcloud --version'
-        }*/
-
-      
-        /*sh """
-          
-          #!/bin/bash 
-          echo "deploy stage";
-          curl -o /tmp/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-225.0.0-linux-x86_64.tar.gz;
-          tar -xvf /tmp/google-cloud-sdk.tar.gz -C /tmp/;
-          /tmp/google-cloud-sdk/install.sh;
-
-          ls /tmp/google-cloud-sdk/;
-
-          echo "$PATH"
-          
-          gcloud --version;
-
-          gcloud components update;
-          gcloud config set project ${PROJECT_ID};
-          gcloud components install kubectl;
-            
-
-          gcloud config list;
-          gcloud app deploy --version=v01;
-          echo "Deployed to GCP"
-        """*/
-      
-//gcloud auth activate-service-account --key-file ${GOOGLE_SERVICE_ACCOUNT_KEY};
 
         docker.withServer('http://cd-jenkins.default.svc.cluster.local:8080/') {
-          docker.build -t "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}" "/"
+          sh '''
+            docker.build -t eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER} /
+          '''
         }
         /*script{ //container('docker') { 
 
