@@ -39,8 +39,7 @@ pipeline {
       
       /*agent {
         label 'gcloud-builder'
-      }*/
-      
+      }*/      
       
       steps {
                 
