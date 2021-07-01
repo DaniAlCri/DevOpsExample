@@ -80,8 +80,10 @@ pipeline {
       
 //gcloud auth activate-service-account --key-file ${GOOGLE_SERVICE_ACCOUNT_KEY};
 
-        echo 'container finished'
-        script{ //container('docker') { 
+        docker.withServer('http://cd-jenkins.default.svc.cluster.local:8080/') {
+          docker.build -t eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER} /
+        }
+        /*script{ //container('docker') { 
 
         sh '''
           apt-get update
@@ -96,7 +98,7 @@ pipeline {
           kubectl create deployment addwebpage-app --image=eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}
           kubectl get services
         '''
-        }
+        }*/
         
         
       }
@@ -144,6 +146,10 @@ pipeline {
       echo 'Failed test, sending mail to developer'
       //emailext(body: "Build failure ${env.BUILD_URL}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
       //            [$class: 'RequesterRecipientProvider']], subject: "Error in build ${currentBuild.fullDisplayName}")
+      
+      // En teoría revertiría el comando de git, evitando subir código no compilable al repositorio
+      //git reset --hard HEAD@{1}
+
     }
 
   }
