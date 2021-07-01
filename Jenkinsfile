@@ -38,9 +38,6 @@ pipeline {
     stage('deploy') {
       
       /*agent {
-        dockerfile { filename 'Dockerfile' }
-      }*/
-      /*agent {
         label 'gcloud-builder'
       }*/
       
@@ -88,7 +85,7 @@ pipeline {
 
         sh '''
           ls
-          
+          docker --version
           echo start building
           docker.build -t eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER} /
           echo Build success
