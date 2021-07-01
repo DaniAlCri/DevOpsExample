@@ -50,7 +50,7 @@ pipeline {
 
         docker('docker'){
           //docker.withServer('http://cd-jenkins.default.svc.cluster.local:8080/') {
-            app = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
+          docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
             
           //}
         }
