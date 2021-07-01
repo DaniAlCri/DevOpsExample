@@ -49,10 +49,10 @@ pipeline {
         echo "Image tag = ${IMAGE_TAG}"
 
         docker('docker'){
-          docker.withServer('http://cd-jenkins.default.svc.cluster.local:8080/') {
+          //docker.withServer('http://cd-jenkins.default.svc.cluster.local:8080/') {
             app = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
             
-          }
+          //}
         }
         /*script{ //container('docker') { 
 
