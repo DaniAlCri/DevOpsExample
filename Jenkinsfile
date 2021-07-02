@@ -49,7 +49,6 @@ pipeline {
         kubernetes{
           yaml '''
           apiVersion: v1
-            kind: Pod
             metadata:
               labels:
                 jenkins/kube-default: true
