@@ -39,7 +39,10 @@ pipeline {
       
       /*agent {
         label 'gcloud-builder'
-      }*/      
+      }*/
+      agent {
+        image 'docker:dind'
+      }
       
       steps {
                 
@@ -47,14 +50,34 @@ pipeline {
         echo "Build number = ${env.BUILD_NUMBER}"
         echo "Image tag = ${IMAGE_TAG}"
 
-        node('builder') {
+        script{
+          sh 'docker --version'
+        }
+
+        container (
+          '''
+          apiVersion: v1
+            kind: Pod
+            spec:
+              containers:
+                name: docker
+                image: docker:dind
+          '''
+        ){
+          script{
+            sh 'ls'
+          }
+        }
+
+
+        /*node('builder') {
           script{
             sh "ls"
         //    git '…' // checks out Dockerfile and some project sources
             def newApp = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
             newApp.push()
           }
-        }
+        }*/
         /*script{
           docker.withRegistry("eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}") {
             def newApp = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
