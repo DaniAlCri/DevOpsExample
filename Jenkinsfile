@@ -50,10 +50,13 @@ pipeline {
         echo "Build number = ${env.BUILD_NUMBER}"
         echo "Image tag = ${IMAGE_TAG}"
 
-        script{
+        /*script{
           sh 'ls'
           sh 'docker --version'
-        }
+        }*/
+
+        def newApp = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
+        newApp.push()
 
         /*container (
           '''
