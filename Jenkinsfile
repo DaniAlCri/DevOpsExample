@@ -90,6 +90,7 @@ pipeline {
                     emptyDir: {}
           '''
         ){
+          sh 'ls'
           script{
             sh 'ls'
             sh 'docker --version'
