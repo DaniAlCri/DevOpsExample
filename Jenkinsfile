@@ -47,12 +47,19 @@ pipeline {
         echo "Build number = ${env.BUILD_NUMBER}"
         echo "Image tag = ${IMAGE_TAG}"
 
+        node {
+          git '…' // checks out Dockerfile and some project sources
+          def newApp = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
+          newApp.push()
+        }
+
+
         //docker('docker'){
-        docker.withServer('tcp://cd-jenkins.default.svc.cluster.local:8080/') {
+        /*docker.withServer('tcp://cd-jenkins.default.svc.cluster.local:8080/') {
           docker.build eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}
             
           //}
-        }
+        }*/
         /*script{ //container('docker') { 
 
         sh '''
