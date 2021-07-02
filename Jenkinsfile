@@ -48,9 +48,11 @@ pipeline {
         echo "Image tag = ${IMAGE_TAG}"
 
         node('cd-jenkins-jenkins-agent') {
-          git '…' // checks out Dockerfile and some project sources
-          def newApp = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
-          newApp.push()
+          script{
+            git '…' // checks out Dockerfile and some project sources
+            def newApp = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
+            newApp.push()
+          }
         }
 
 
