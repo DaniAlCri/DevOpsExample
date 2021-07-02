@@ -41,7 +41,9 @@ pipeline {
         label 'gcloud-builder'
       }*/
       agent {
-        docker 'docker:dind'
+        docker {
+          image 'docker:dind'
+        }
       }
       
       steps {
@@ -50,22 +52,47 @@ pipeline {
         echo "Build number = ${env.BUILD_NUMBER}"
         echo "Image tag = ${IMAGE_TAG}"
 
-        script{
+        /*script{
           sh 'docker --version'
-        }
+        }*/
 
         container (
           '''
-          apiVersion: v1
-            kind: Pod
-            spec:
-              containers:
-                name: docker
-                image: docker:dind
+            apiVersion: v1 
+            kind: Pod 
+            metadata: 
+                name: dind 
+            spec: 
+                containers: 
+                  - name: docker-cmds 
+                    image: docker:1.12.6 
+                    command: ['docker', 'run', '-p', '80:80', 'httpd:latest'] 
+                    resources: 
+                        requests: 
+                            cpu: 10m 
+                            memory: 256Mi 
+                    env: 
+                      - name: DOCKER_HOST 
+                        value: tcp://localhost:2375 
+                  - name: dind-daemon 
+                    image: docker:1.12.6-dind 
+                    resources: 
+                        requests: 
+                            cpu: 20m 
+                            memory: 512Mi 
+                    securityContext: 
+                        privileged: true 
+                    volumeMounts: 
+                      - name: docker-graph-storage 
+                        mountPath: /var/lib/docker 
+                volumes: 
+                  - name: docker-graph-storage 
+                    emptyDir: {}
           '''
         ){
           script{
             sh 'ls'
+            sh 'docker --version'
           }
         }
 
