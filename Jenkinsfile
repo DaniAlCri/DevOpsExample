@@ -45,6 +45,48 @@ pipeline {
           image 'docker:dind'
         }
       }*/
+      agent{
+        kubernetes{
+          yaml '''
+          apiVersion: v1
+            kind: Pod
+            metadata:
+              labels:
+                jenkins/kube-default: true
+                app: jenkins
+                component: agent
+            spec:
+              containers:
+                - name: jnlp
+                  image: jenkins/inbound-agent:4.6-1
+                  resources:
+                    limits:
+                      cpu: 1
+                      memory: 2Gi
+                    requests:
+                      cpu: 1
+                      memory: 2Gi
+                  imagePullPolicy: Always
+                  env:
+                  - name: POD_IP
+                    valueFrom:
+                      fieldRef:
+                        fieldPath: status.podIP
+                  - name: DOCKER_HOST
+                    value: tcp://localhost:8080
+                - name: dind
+                  image: docker:18.05-dind
+                  securityContext:
+                    privileged: true
+                  volumeMounts:
+                    - name: dind-storage
+                      mountPath: /var/lib/docker
+              volumes:
+                - name: dind-storage
+                  emptyDir: {}
+      '''
+        }
+      }
       
       steps {
                 
@@ -52,11 +94,12 @@ pipeline {
         echo "Build number = ${env.BUILD_NUMBER}"
         echo "Image tag = ${IMAGE_TAG}"
 
-        /*script{
+        script{
+          sh 'ls'
           sh 'docker --version'
-        }*/
+        }
 
-        container (
+        /*container (
           '''
             apiVersion: v1 
             kind: Pod 
@@ -95,7 +138,7 @@ pipeline {
             sh 'ls'
             sh 'docker --version'
           }
-        }
+        }*/
 
 
         /*node('builder') {
