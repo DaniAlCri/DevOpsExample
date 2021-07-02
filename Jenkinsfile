@@ -43,6 +43,14 @@ pipeline {
       /*agent {
         docker { image 'docker:dind' }
       }*/
+
+      /*agent {
+        kubernetes{
+          image 'docker:dind'
+          args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }
+        
+      }*/
       
       steps {
                 
@@ -50,12 +58,12 @@ pipeline {
         echo "Build number = ${env.BUILD_NUMBER}"
         echo "Image tag = ${IMAGE_TAG}"
 
-        /*script{
+        script{
           sh 'ls'
           sh 'docker --version'
-        }*/
+        }
 
-        sh "docker build eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
+        //sh "docker build eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
         //newApp.push()
 
         /*container (
