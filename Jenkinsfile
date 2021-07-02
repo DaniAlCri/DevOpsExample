@@ -47,7 +47,7 @@ pipeline {
         echo "Build number = ${env.BUILD_NUMBER}"
         echo "Image tag = ${IMAGE_TAG}"
 
-        node{('builder') {
+        node('builder') {
           script{
             sh "ls"
         //    git '…' // checks out Dockerfile and some project sources
