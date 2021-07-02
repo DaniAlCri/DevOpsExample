@@ -18,10 +18,7 @@ pipeline {
         echo 'Build stage'
         nodejs('nodejs') {
           sh 'npm config ls'
-          sh 'npm install --global mocha'
-          sh 'npm install -g mocha-junit-reporter'
-        }
-
+          sh 'npm --version'
       }
     }
 
@@ -31,7 +28,6 @@ pipeline {
         nodejs('nodejs') {
           sh 'npm test'
         }
-
       }
     }
 
