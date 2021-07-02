@@ -41,7 +41,7 @@ pipeline {
         label 'gcloud-builder'
       }*/
       agent {
-        image 'docker:dind'
+        docker 'docker:dind'
       }
       
       steps {
