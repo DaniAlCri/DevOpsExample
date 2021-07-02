@@ -49,11 +49,6 @@ pipeline {
         kubernetes{
           yaml '''
           apiVersion: v1
-            metadata:
-              labels:
-                jenkins/kube-default: true
-                app: jenkins
-                component: agent
             spec:
               containers:
                 - name: jnlp
