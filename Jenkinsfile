@@ -58,10 +58,10 @@ pipeline {
         echo "Build number = ${env.BUILD_NUMBER}"
         echo "Image tag = ${IMAGE_TAG}"
 
-        script{
+        /*script{
           sh 'ls'
           sh 'docker --version'
-        }
+        }*/
 
         //sh "docker build eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
         //newApp.push()
@@ -188,14 +188,14 @@ pipeline {
   post {
     success {
       echo 'Succesfull test'
-      //emailext(body: "Everything is ok ${env.BUILD_URL}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-      //            [$class: 'RequesterRecipientProvider']], subject: "Successful in build ${currentBuild.fullDisplayName}")
+      emailext(body: "Everything is ok ${env.BUILD_URL}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+                  [$class: 'RequesterRecipientProvider']], subject: "Successful in build ${currentBuild.fullDisplayName}")
     }
 
     failure {
       echo 'Failed test, sending mail to developer'
-      //emailext(body: "Build failure ${env.BUILD_URL}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-      //            [$class: 'RequesterRecipientProvider']], subject: "Error in build ${currentBuild.fullDisplayName}")
+      emailext(body: "Build failure ${env.BUILD_URL}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+                  [$class: 'RequesterRecipientProvider']], subject: "Error in build ${currentBuild.fullDisplayName}")
       
       // En teoría revertiría el comando de git, evitando subir código no compilable al repositorio
       //git reset --hard HEAD@{1}
