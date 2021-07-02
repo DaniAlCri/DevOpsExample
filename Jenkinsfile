@@ -49,6 +49,7 @@ pipeline {
 
         node('cd-jenkins-jenkins-agent') {
           script{
+            sh "ls"
             git '…' // checks out Dockerfile and some project sources
             def newApp = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
             newApp.push()
