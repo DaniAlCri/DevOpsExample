@@ -55,13 +55,14 @@ pipeline {
             newApp.push()
           }
         }*/
-
-        docker.withRegistry("eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}") {
-          def newApp = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
-          //def myImg = docker.image('myImg')
-          // or docker.build, etc.
-          sh "docker pull --all-tags def newApp = docker.build eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"//${myImg.imageName()}"
-          // runs: docker pull --all-tags docker.mycorp.com/myImg
+        script{
+          docker.withRegistry("eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}") {
+            def newApp = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
+            //def myImg = docker.image('myImg')
+            // or docker.build, etc.
+            sh "docker pull --all-tags def newApp = docker.build eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"//${myImg.imageName()}"
+            // runs: docker pull --all-tags docker.mycorp.com/myImg
+          }
         }
 
 
