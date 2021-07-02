@@ -55,7 +55,7 @@ pipeline {
           sh 'docker --version'
         }*/
 
-        docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
+        sh "docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}""
         //newApp.push()
 
         /*container (
