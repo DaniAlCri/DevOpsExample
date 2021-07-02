@@ -36,160 +36,26 @@ pipeline {
     }
 
     stage('deploy') {
-      
-      /*agent {
-        label 'gcloud-builder'
-      }*/
-      /*agent {
-        docker { image 'docker:dind' }
-      }*/
-
-      /*agent {
-        kubernetes{
-          image 'docker:dind'
-          args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-        
-      }*/
-      
+            
       steps {
                 
         echo 'Deploy stage'
         echo "Build number = ${env.BUILD_NUMBER}"
         echo "Image tag = ${IMAGE_TAG}"
-
-        /*script{
-          sh 'ls'
-          sh 'docker --version'
-        }*/
-
-        //sh "docker build eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
-        //newApp.push()
-
-        /*container (
-          '''
-            apiVersion: v1 
-            kind: Pod 
-            metadata: 
-                name: dind 
-            spec: 
-                containers: 
-                  - name: docker-cmds 
-                    image: docker:1.12.6 
-                    command: ['docker', 'run', '-p', '80:80', 'httpd:latest'] 
-                    resources: 
-                        requests: 
-                            cpu: 10m 
-                            memory: 256Mi 
-                    env: 
-                      - name: DOCKER_HOST 
-                        value: tcp://localhost:2375 
-                  - name: dind-daemon 
-                    image: docker:1.12.6-dind 
-                    resources: 
-                        requests: 
-                            cpu: 20m 
-                            memory: 512Mi 
-                    securityContext: 
-                        privileged: true 
-                    volumeMounts: 
-                      - name: docker-graph-storage 
-                        mountPath: /var/lib/docker 
-                volumes: 
-                  - name: docker-graph-storage 
-                    emptyDir: {}
-          '''
-        ){
-          sh 'ls'
-          script{
-            sh 'ls'
-            sh 'docker --version'
-          }
-        }*/
-
-
-        /*node('builder') {
-          script{
-            sh "ls"
-        //    git '…' // checks out Dockerfile and some project sources
-            def newApp = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
-            newApp.push()
-          }
-        }*/
-        /*script{
-          docker.withRegistry("eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}") {
-            def newApp = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
-            //def myImg = docker.image('myImg')
-            // or docker.build, etc.
-            sh "docker pull --all-tags def newApp = docker.build eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"//${myImg.imageName()}"
-            // runs: docker pull --all-tags docker.mycorp.com/myImg
-          }
-        }*/
-
-
-        //docker('docker'){
-        /*docker.withServer('tcp://cd-jenkins.default.svc.cluster.local:8080/') {
-          docker.build eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}
-            
-          //}
-        }*/
-        /*script{ //container('docker') { 
-
-        sh '''
-          apt-get update
-          apt-get install docker
-          ls
-          docker --version
-          echo start building
-          docker.build -t eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER} /
-          echo Build success
-          docker push eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}
-          docker push eu.gcr.io/${PROJECT_ID}/addwebpage:
-          kubectl create deployment addwebpage-app --image=eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}
-          kubectl get services
-        '''
-        }*/
-        
         
       }
       
-      
-
-      /*steps {
-        echo 'Deploy stage'
-        echo "Build number = ${env.BUILD_NUMBER}"
-
-        script{
-          app = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:B${env.BUILD_NUMBER}"
-          docker.withRegistry("eu.gcr.io/${PROJECT_ID}/addwebpage:B${env.BUILD_NUMBER}", git){
-            app.push("B${env.BUILD_NUMBER}") 
-            app.push('latest')
-
-          }
-        }
-        
-        sh '''
-          ls
-          echo start building
-          docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER} /
-          echo Build success
-          docker push eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}
-          docker push eu.gcr.io/${PROJECT_ID}/addwebpage:latest
-          kubectl create deployment addwebpage-app --image=eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}
-          kubectl get services
-        '''
-
-
-
-      }*/
     }
 
   }
   post {
     success {
       echo 'Succesfull test'
-      emailext(body: "Everything is ok ${env.BUILD_URL}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-                  [$class: 'RequesterRecipientProvider']], subject: "Successful in build ${currentBuild.fullDisplayName}")
+      emailext(body: "Everything is ok in build ${env.BUILD_URL}. Please, compile the new version after cheking for ${IMAGE_TAG}. 
+        \n docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:v1 .\n kubectl --namespace=production apply -f deploy/ \n
+        kubectl --namespace=production scale deployment addwebpage-deploy --replicas=4\n"
+        , recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+        [$class: 'RequesterRecipientProvider']], subject: "Successful in build ${currentBuild.fullDisplayName}")
     }
 
     failure {
