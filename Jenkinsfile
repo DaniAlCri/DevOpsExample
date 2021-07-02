@@ -47,14 +47,14 @@ pipeline {
         echo "Build number = ${env.BUILD_NUMBER}"
         echo "Image tag = ${IMAGE_TAG}"
 
-        node('cd-jenkins-jenkins-agent') {
+        //node('cd-jenkins-jenkins-agent') {
           script{
             sh "ls"
-            git '…' // checks out Dockerfile and some project sources
+        //    git '…' // checks out Dockerfile and some project sources
             def newApp = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
             newApp.push()
           }
-        }
+        //}
 
 
         //docker('docker'){
