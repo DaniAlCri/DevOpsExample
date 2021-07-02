@@ -47,13 +47,21 @@ pipeline {
         echo "Build number = ${env.BUILD_NUMBER}"
         echo "Image tag = ${IMAGE_TAG}"
 
-        node{//('cd-jenkins-jenkins-agent') {
+        /*node{//('cd-jenkins-jenkins-agent') {
           script{
             sh "ls"
         //    git '…' // checks out Dockerfile and some project sources
             def newApp = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
             newApp.push()
           }
+        }*/
+
+        docker.withRegistry("eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}") {
+          def newApp = docker.build "eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"
+          //def myImg = docker.image('myImg')
+          // or docker.build, etc.
+          sh "docker pull --all-tags def newApp = docker.build eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER}"//${myImg.imageName()}"
+          // runs: docker pull --all-tags docker.mycorp.com/myImg
         }
 
 
