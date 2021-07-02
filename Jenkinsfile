@@ -41,46 +41,8 @@ pipeline {
         label 'gcloud-builder'
       }*/
       /*agent {
-        docker {
-          image 'docker:dind'
-        }
+        docker { image 'docker:dind' }
       }*/
-      agent{
-        kubernetes{
-          yaml '''
-          apiVersion: v1
-            spec:
-              containers:
-                - name: jnlp
-                  image: jenkins/inbound-agent:4.6-1
-                  resources:
-                    limits:
-                      cpu: 1
-                      memory: 2Gi
-                    requests:
-                      cpu: 1
-                      memory: 2Gi
-                  imagePullPolicy: Always
-                  env:
-                  - name: POD_IP
-                    valueFrom:
-                      fieldRef:
-                        fieldPath: status.podIP
-                  - name: DOCKER_HOST
-                    value: tcp://localhost:8080
-                - name: dind
-                  image: docker:18.05-dind
-                  securityContext:
-                    privileged: true
-                  volumeMounts:
-                    - name: dind-storage
-                      mountPath: /var/lib/docker
-              volumes:
-                - name: dind-storage
-                  emptyDir: {}
-      '''
-        }
-      }
       
       steps {
                 
