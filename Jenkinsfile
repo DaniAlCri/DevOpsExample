@@ -32,7 +32,7 @@ pipeline {
     stage('test') {
       steps {
         echo 'Test stage'
-        nodejs(nodeJSInstallationName: 'NodeJs') {
+        nodejs(nodeJSInstallationName: 'nodejs') {
           sh 'npm test'
         }
       }
