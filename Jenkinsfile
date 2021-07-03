@@ -51,9 +51,9 @@ pipeline {
   post {
     success {
       echo 'Succesfull test'
-      emailext(body: "Everything is ok in build ${env.BUILD_URL}. Please, compile the new version after cheking for ${IMAGE_TAG}. 
-        \n docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:v1 .\n kubectl --namespace=production apply -f deploy/ \n
-        kubectl --namespace=production scale deployment addwebpage-deploy --replicas=4\n"
+      emailext(body: "Everything is ok in build ${env.BUILD_URL}. Please, compile the new version after cheking for ${IMAGE_TAG}. /
+       %m docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:v1 . %m kubectl --namespace=production apply -f deploy/ %m /
+      kubectl --namespace=production scale deployment addwebpage-deploy --replicas=4\n"
         , recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
         [$class: 'RequesterRecipientProvider']], subject: "Successful in build ${currentBuild.fullDisplayName}")
     }
