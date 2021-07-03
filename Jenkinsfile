@@ -58,7 +58,7 @@ pipeline {
         emailext(
           body: "Compilación exitosa en build ${env.BUILD_URL}. Por favor, actualice la versión del repositorio de ${IMAGE_TAG} \
             con los siguientes comandos. \
-            <br> docker build -t IMAGE_TAG . <br> docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:latest . <br>   \
+            <br> docker build -t ${IMAGE_TAG} . <br> docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:latest . <br>   \
             kubectl --namespace=production apply -f deploy/ <br> kubectl --namespace=production scale deployment \
             addwebpage-deploy --replicas=4",
           recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
