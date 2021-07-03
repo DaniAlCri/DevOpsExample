@@ -19,6 +19,7 @@ pipeline {
         nodejs('nodejs') {
           sh 'npm config ls'
           sh 'npm --version'
+        }
       }
     }
 
@@ -42,8 +43,8 @@ pipeline {
       }
       
     }
-
   }
+  
   post {
     success {
       echo 'Succesfull test'
