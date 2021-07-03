@@ -14,19 +14,25 @@ pipeline {
 
   stages {
     stage('build') {
+      
       steps {
         echo 'Build stage'
-        nodejs('nodejs') {
+
+        nodejs(nodeJSInstallationName: 'NodeJs') {
           sh 'npm config ls'
-          sh 'npm --version'
+          sh 'npm install --global mocha'
+          sh 'npm install -g mocha-junit-reporter'
         }
+
+
       }
     }
+  
 
     stage('test') {
       steps {
         echo 'Test stage'
-        nodejs('nodejs') {
+        nodejs(nodeJSInstallationName: 'NodeJs') {
           sh 'npm test'
         }
       }
