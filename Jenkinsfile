@@ -63,9 +63,9 @@ pipeline {
         emailext(
           body: "Everything is ok in build ${env.BUILD_URL}. Please, compile the new version after cheking for ${IMAGE_TAG}. \
             <br> docker build -t IMAGE_TAG . <br> docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:latest . <br>   \
-            kubectl --namespace=production apply -f deploy/ %m <br> kubectl --namespace=production scale deployment \
+            kubectl --namespace=production apply -f deploy/ <br> kubectl --namespace=production scale deployment \
             addwebpage-deploy --replicas=4",
-          recipientProviders: [developers(), requestor()],
+          recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
           subject: "Compilación exitosa ${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
         )
     }
