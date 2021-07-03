@@ -54,14 +54,10 @@ pipeline {
   post {
     success {
       echo 'Succesfull test'
-      /*emailext(
-        body: "Everything is ok in build ${env.BUILD_URL}. Please, compile the new version after cheking for ${IMAGE_TAG}. \
-          <br> docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:v1 . %m kubectl --namespace=production apply -f deploy/ %m \
-          kubectl --namespace=production scale deployment addwebpage-deploy --replicas=4"
-        , recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-        [$class: 'RequesterRecipientProvider']], subject: "Successful in build ${currentBuild.fullDisplayName}")*/
+
         emailext(
-          body: "Everything is ok in build ${env.BUILD_URL}. Please, compile the new version after cheking for ${IMAGE_TAG}. \
+          body: "Compilación exitosa en build ${env.BUILD_URL}. Por favor, actualice la versión del repositorio de ${IMAGE_TAG} \
+            con los siguientes comandos. \
             <br> docker build -t IMAGE_TAG . <br> docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:latest . <br>   \
             kubectl --namespace=production apply -f deploy/ <br> kubectl --namespace=production scale deployment \
             addwebpage-deploy --replicas=4",
@@ -72,11 +68,15 @@ pipeline {
 
     failure {
       echo 'Failed test, sending mail to developer'
-      emailext(body: "Build failure ${env.BUILD_URL}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-                  [$class: 'RequesterRecipientProvider']], subject: "Error in build ${currentBuild.fullDisplayName}")
+
+      emailext(
+          body: "Compilación fallida ${env.BUILD_URL}. Por favor, revise el código.",
+          recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+          subject: "Error en build ${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+        )
       
       // En teoría revertiría el comando de git, evitando subir código no compilable al repositorio
-      //git reset --hard HEAD@{1}
+      git reset --hard HEAD@{1}
 
     }
 
