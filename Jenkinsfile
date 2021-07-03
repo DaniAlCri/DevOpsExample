@@ -60,13 +60,14 @@ pipeline {
           kubectl --namespace=production scale deployment addwebpage-deploy --replicas=4"
         , recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
         [$class: 'RequesterRecipientProvider']], subject: "Successful in build ${currentBuild.fullDisplayName}")*/
-        emailext:
+        emailext(
           body: "Everything is ok in build ${env.BUILD_URL}. Please, compile the new version after cheking for ${IMAGE_TAG}. \
             <br> docker build -t IMAGE_TAG . \\ docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:latest . \\   \
             kubectl --namespace=production apply -f deploy/ %m \\ kubectl --namespace=production scale deployment \
             addwebpage-deploy --replicas=4",
           recipientProviders: [developers(), requestor()],
           subject: "Compilación exitosa ${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+        )
     }
 
     failure {
