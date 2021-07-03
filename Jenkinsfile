@@ -74,9 +74,6 @@ pipeline {
           recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
           subject: "Error en build ${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
         )
-      
-      // En teoría revertiría el comando de git, evitando subir código no compilable al repositorio
-      git reset --hard HEAD@{1}
 
     }
 
