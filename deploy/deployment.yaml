@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: addwebpage
-        image: eu.gcr.io/proyectokubernetes-301509/addwebpage:latest #path to your docker image
+        image: eu.gcr.io/proyectokubernetes-301509/addwebpage:latest
         ports:
         - containerPort: 8081

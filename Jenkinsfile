@@ -5,11 +5,7 @@ pipeline {
   environment {
     PROJECT_ID  = 'proyectokubernetes-301509'
     APP_NAME = "addwebpage"
-    FE_SVC_NAME = "${APP_NAME}-frontend"
-    CLUSTER = "jenkins-cd"
-    CLUSTER_ZONE = "eu-west1-b"
     IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
-    JENKINS_CRED = "${PROJECT}"
   }
 
   stages {
@@ -79,3 +75,5 @@ pipeline {
 
   }
 }
+
+
