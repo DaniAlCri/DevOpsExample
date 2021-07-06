@@ -15,9 +15,9 @@ pipeline {
         echo 'Build stage'
 
         nodejs(nodeJSInstallationName: 'nodejs') {
-          sh 'npm config ls'
-          sh 'npm install --global mocha'
-          sh 'npm install -g mocha-junit-reporter'
+          bat 'npm config ls'
+          bat 'npm install --global mocha'
+          bat 'npm install -g mocha-junit-reporter'
         }
 
 
@@ -29,7 +29,7 @@ pipeline {
       steps {
         echo 'Test stage'
         nodejs(nodeJSInstallationName: 'nodejs') {
-          sh 'npm test'
+          bat 'npm test'
         }
       }
     }
