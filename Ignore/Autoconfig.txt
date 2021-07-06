@@ -1,0 +1,42 @@
+cd
+rm -R DevOpsServer
+mkdir DevOpsServer
+cd DevOpsServer
+ 
+gcloud container clusters create jenkins-devops  --machine-type n1-standard-2 --zone europe-west1-b --num-nodes 2   --scopes "https://www.googleapis.com/auth/source.read_write,cloud-platform" 
+gcloud container clusters list
+kubectl cluster-info
+
+wget https://get.helm.sh/helm-v3.2.1-linux-amd64.tar.gz
+tar zxfv helm-v3.2.1-linux-amd64.tar.gz
+cp linux-amd64/helm .
+
+kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin \
+        --user=$(gcloud config get-value account)
+
+./helm repo add jenkinsci https://charts.jenkins.io
+./helm repo update
+./helm version
+
+wget -P jenkins/ https://raw.githubusercontent.com/GoogleCloudPlatform/continuous-deployment-on-kubernetes/v1/jenkins/k8s/service_jenkins.yaml
+
+./helm install cd-jenkins -f jenkins/service_jenkins.yaml jenkinsci/jenkins --wait
+kubectl get pods
+
+export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/component=jenkins-master" -l "app.kubernetes.io/instance=cd-jenkins" -o jsonpath="{.items[0].metadata.name}")
+
+kubectl port-forward $POD_NAME 8080:8080 >> /dev/null &
+kubectl get svc
+
+printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+
+
+CONECTAR
+
+export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/component=jenkins-master" -l "app.kubernetes.io/instance=cd-jenkins" -o jsonpath="{.items[0].metadata.name}")
+
+kubectl port-forward $POD_NAME 8080:8080 >> /dev/null &
+kubectl get svc
+
+printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+

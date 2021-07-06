@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+	<!-- 
+    Script de javascript que permite sumar los valores que se pasen
+	como un string.
+	-->
+	<script type="text/javascript" src="/js/AddScript.js"></script>
+
+	<body>
+
+		<h1 style="color: #5e9ca0;">DevOps example</h1>
+		<h2 style="color: #2e6c80;">This is a simple app</h2>
+		<p>This example adds the numbers put in the text box and separated by at least one space</p>
+
+		<form >
+			<textarea id="input" name="TextBox" rows="4" cols="50" oninput="output.value=add(this.value)">
+			</textarea>
+			<br>
+			Result = 
+			<output type="number" id="output" name="result">
+			<br>
+		</form>
+
+		
+	</body>
+</html>

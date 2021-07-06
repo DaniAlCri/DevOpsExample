@@ -1,24 +1,15 @@
-//F1 > Mocha run all tests
-
-//import AddScript from '../AddScript.js';
+//run with "npm test"
 
 const assert = require('assert');
-const AddScript = require ('../AddScript.js');
+const AddScript = require ('../www/js/AddScript.js');
 
 var result = 5;
-
-//https://alisdair.mcdiarmid.org/simple-nodejs-tests-with-assert-and-mocha/
 
 describe('Testing AddScript.js', function(){
 
   it('True == True, Unit test checking', function() {
     assert.strictEqual(1,1, "There is a problem in the Unit test")
   })
-
- /* it('Add exist', function () {
-    //expect(algorithm).to.be.a('function');
-
-  }); */
 
   it('Normal case', function() {
     var result = AddScript.add("2 3");
