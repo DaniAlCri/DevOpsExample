@@ -3,7 +3,9 @@ pipeline {
     label any
   }
   environment {
-    IMAGE_TAG = "gcr.io/proyectokubernetes-301509/addwebpage:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+    PROJECT_ID  = 'proyectokubernetes-301509'
+    APP_NAME = 'addwebpage'
+    IMAGE_TAG = 'gcr.io/${PROJECT}/${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}'
   }
 
   stages {
