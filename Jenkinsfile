@@ -2,11 +2,11 @@ pipeline {
   agent {
     label any
   }
-  environment {
+  /*environment {
     //PROJECT_ID  = 'proyectokubernetes-301509'
     //APP_NAME = 'addwebpage'
     //IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
-  }
+  }*/
 
   stages {
     stage('build') {
