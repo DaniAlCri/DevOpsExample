@@ -29,7 +29,7 @@ pipeline {
     stage('test') {
       steps {
         echo 'Test stage'
-        nodejs(nodeJSInstallationName: 'nodejs') {
+        nodejs('nodejs') {
           bat 'npm test'
         }
       }
@@ -38,8 +38,8 @@ pipeline {
     stage('deploy') {            
       steps {                
         echo 'Deploy stage'
-        echo "Build number = %env.BUILD_NUMBER%"
-        echo "Image tag = %IMAGE_TAG%"
+        echo "Build number = ${env.BUILD_NUMBER}"
+        echo "Image tag = ${MAGE_TAG}"
         
       }      
     }
