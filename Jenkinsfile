@@ -39,7 +39,7 @@ pipeline {
       steps {                
         echo 'Deploy stage'
         echo "Build number = ${env.BUILD_NUMBER}"
-        echo "Image tag = ${MAGE_TAG}"
+        echo "Image tag = ${IMAGE_TAG}"
         
       }      
     }
