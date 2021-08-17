@@ -55,7 +55,8 @@ pipeline {
           <br> docker build -t ${IMAGE_TAG} . <br> docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:latest . <br>   \
           kubectl --namespace=production apply -f deploy/ <br> kubectl --namespace=production scale deployment \
           addwebpage-deploy --replicas=4",
-        recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+        //recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+        recipientProviders: [developers(), requestor()],
         subject: "Compilación exitosa ${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
       )
     }
@@ -65,7 +66,8 @@ pipeline {
 
       emailext(
           body: "Compilación fallida ${env.BUILD_URL}. Por favor, revise el código.",
-          recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+          //recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+          recipientProviders: [developers(), requestor()],
           subject: "Error en build ${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
 
       )
