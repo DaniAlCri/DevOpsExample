@@ -5,7 +5,8 @@ pipeline {
   environment {
     PROJECT_ID  = 'proyectokubernetes-301509'
     APP_NAME = "addwebpage"
-    IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+    IMAGE_TAG = "eu.gcr.io/${PROJECT_ID}/${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+
   }
 
   stages {
