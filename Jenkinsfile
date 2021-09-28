@@ -67,7 +67,7 @@ pipeline {
 
       emailext(
           body: "Compilacion fallida ${env.BUILD_URL}. Por favor, revise el codigo.",
-          recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+          recipientProviders: [[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']],
           subject: "Error en compilacion ${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
         )
 
