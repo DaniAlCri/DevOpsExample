@@ -47,8 +47,8 @@ pipeline {
         //  app.push("${env.BUILD_NUMBER}")            
         //  app.push("latest")  
         //}
-        docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:v1 .
-        docker push eu.gcr.io/${PROJECT_ID}/addwebpage:v1
+        docker build -t 'eu.gcr.io/${PROJECT_ID}/addwebpage:v1' .
+        docker push 'eu.gcr.io/${PROJECT_ID}/addwebpage:v1'
         
       }
       
