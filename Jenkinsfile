@@ -40,39 +40,40 @@ pipeline {
         echo 'Deploy stage'
         echo "Build number = ${env.BUILD_NUMBER}"
         echo "Image tag = ${IMAGE_TAG}"
+
+        docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:latest . 
+        docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:${env.BUILD_NUMBER} . 
         
       }      
     }
   }
   
-  post {
+post {
     success {
       echo 'Succesfull test'
 
-      emailext(
-        body: "Compilación exitosa en build ${env.BUILD_URL}. Por favor, actualice la versión del repositorio de ${IMAGE_TAG} \
-          con los siguientes comandos. \
-          <br> docker build -t ${IMAGE_TAG} . <br> docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:latest . <br>   \
-          kubectl --namespace=production apply -f deploy/ <br> kubectl --namespace=production scale deployment \
-          addwebpage-deploy --replicas=4",
-        recipientProviders: [developers(), requestor()],
-        subject: "Compilación exitosa ${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
-      )
+        emailext(
+          body: "Compilacion exitosa en build ${env.BUILD_URL}. Por favor, actualice la version del repositorio de ${IMAGE_TAG} \
+            con los siguientes comandos. \
+            <br> docker build -t ${IMAGE_TAG} . <br> docker build -t eu.gcr.io/${PROJECT_ID}/addwebpage:latest . <br>   \
+            kubectl --namespace=production apply -f deploy/ <br> kubectl --namespace=production scale deployment \
+            addwebpage-deploy --replicas=4",
+          recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+          subject: "Compilacion exitosa ${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+        )
     }
 
     failure {
       echo 'Failed test, sending mail to developer'
 
       emailext(
-          body: "Compilación fallida ${env.BUILD_URL}. Por favor, revise el código.",
-          recipientProviders: [developers(), requestor()],
+          body: "Compilacion fallida ${env.BUILD_URL}. Por favor, revise el codigo.",
+          recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
           subject: "Error en build ${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
-
-      )
+        )
 
     }
 
   }
 }
-
 
