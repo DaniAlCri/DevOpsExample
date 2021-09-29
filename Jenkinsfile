@@ -49,7 +49,7 @@ pipeline {
   
   post {
     success {
-      echo 'Succesfull test'
+      echo 'Succesfull test, sending mail to developer'
 
         emailext(
           body: "Compilacion exitosa en build ${env.BUILD_URL}. Por favor, actualice la version del repositorio de ${IMAGE_TAG} \
@@ -63,7 +63,7 @@ pipeline {
     }
 
     failure {
-      echo 'Failed test, sending mail to developer'
+      echo 'Failed test, sending mail to commiter'
 
       emailext(
           body: "Compilacion fallida ${env.BUILD_URL}. Por favor, revise el codigo.",
