@@ -41,14 +41,6 @@ pipeline {
         echo 'Deploy stage'
         echo "Build number = ${env.BUILD_NUMBER}"
         echo "Image tag = ${IMAGE_TAG}"
-
-        //docker.withRegistry('https://registry.hub.docker.com', 'git') {            
-        //docker.withRegistry('https://eu.gcr.io/${PROJECT_ID}/addwebpage:v1', 'git') {
-        //  app.push("${env.BUILD_NUMBER}")            
-        //  app.push("latest")  
-        //}
-        docker build -t 'eu.gcr.io/${PROJECT_ID}/addwebpage:v1' .
-        docker push 'eu.gcr.io/${PROJECT_ID}/addwebpage:v1'
         
       }
       
