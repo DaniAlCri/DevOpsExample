@@ -3,7 +3,7 @@ pipeline {
     label 'cd-jenkins-jenkins-agent'
   }
   environment {
-    PROJECT_ID  = 'proyectokubernetes-301509'
+    PROJECT_ID  = 'devopsserver-371418'
     APP_NAME = "addwebpage"
     IMAGE_TAG = "eu.gcr.io/${PROJECT_ID}/${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
   }
